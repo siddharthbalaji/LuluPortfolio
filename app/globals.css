@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --abyss: #0a1931;
+  --deep: #1a3d63;
+  --tide: #4a7fa7;
+  --mist: #b3cfe5;
+  --foam: #f6fafd;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--abyss);
+  color: var(--foam);
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+}
+
+/* Selection */
+::selection {
+  background: rgba(74, 127, 167, 0.55);
+  color: var(--foam);
+}
+
+/* Custom scrollbar — reads as deep water */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--abyss);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--deep), var(--tide));
+  border-radius: 999px;
+  border: 2px solid var(--abyss);
+}
+
+@layer utilities {
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(179, 207, 229, 0.45) 0%,
+      rgba(179, 207, 229, 0.45) 30%,
+      rgba(246, 250, 253, 0.95) 50%,
+      rgba(179, 207, 229, 0.45) 70%,
+      rgba(179, 207, 229, 0.45) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* The signature reflection: a mirrored, fading echo beneath an element */
+  .reflect::after {
+    content: attr(data-reflect);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    transform: scaleY(-1);
+    transform-origin: top;
+    opacity: 0.16;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 72%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 72%);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .edge-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

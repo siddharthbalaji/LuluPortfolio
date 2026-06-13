@@ -13,11 +13,16 @@ export default function CountUp({
   duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-15%" });
+  // `amount` fires when a fraction of the element is visible — unlike a negative
+  // root `margin`, it triggers reliably for content already on screen at load
+  // (e.g. the hero stats, which sit at the bottom of the first viewport).
+  const inView = useInView(ref, { once: true, amount: 0.4 });
   const [n, setN] = useState(0);
+  const started = useRef(false);
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || started.current) return;
+    started.current = true;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
       setN(to);
@@ -31,6 +36,7 @@ export default function CountUp({
       const p = Math.min((ts - start) / duration, 1);
       setN(Math.round(ease(p) * to));
       if (p < 1) raf = requestAnimationFrame(step);
+      else setN(to); // guarantee we land exactly on the target
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);

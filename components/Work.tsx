@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { POSTER_GROUPS, ILLUSTRATIONS, VIDEOS, type Media } from "@/lib/media";
 import { thumb, poster } from "@/lib/cloudinary";
@@ -17,15 +17,51 @@ const TABS: { id: Tab; label: string; count: number }[] = [
 
 const POSTER_CATS = ["All", ...POSTER_GROUPS.map((g) => g.category)];
 
+// How many items to show before "View all": fewer on small screens, max 6 on large.
+function useCollapsedCount() {
+  const [count, setCount] = useState(6); // desktop default (matches SSR markup)
+  useEffect(() => {
+    const lg = window.matchMedia("(min-width: 1024px)");
+    const sm = window.matchMedia("(min-width: 640px)");
+    const update = () => setCount(lg.matches ? 6 : sm.matches ? 4 : 2);
+    update();
+    lg.addEventListener("change", update);
+    sm.addEventListener("change", update);
+    return () => {
+      lg.removeEventListener("change", update);
+      sm.removeEventListener("change", update);
+    };
+  }, []);
+  return count;
+}
+
 export default function Work() {
   const [tab, setTab] = useState<Tab>("posters");
   const [cat, setCat] = useState("All");
+  const [showAll, setShowAll] = useState(false);
+  const collapsedCount = useCollapsedCount();
   const open = useUI((s) => s.open);
 
   const posterItems = useMemo<Media[]>(() => {
     if (cat === "All") return POSTER_GROUPS.flatMap((g) => g.items);
     return POSTER_GROUPS.find((g) => g.category === cat)?.items ?? [];
   }, [cat]);
+
+  // The list backing the active tab.
+  const activeItems = useMemo<Media[]>(() => {
+    if (tab === "illustrations") return ILLUSTRATIONS;
+    if (tab === "motion") return VIDEOS;
+    return posterItems;
+  }, [tab, posterItems]);
+
+  // Collapse again whenever the view changes.
+  useEffect(() => {
+    setShowAll(false);
+  }, [tab, cat]);
+
+  const hasMore = activeItems.length > collapsedCount;
+  const visibleItems =
+    showAll || !hasMore ? activeItems : activeItems.slice(0, collapsedCount);
 
   return (
     <section id="work" className="relative bg-abyss px-6 py-24 sm:px-10 lg:py-32">
@@ -102,22 +138,51 @@ export default function Work() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="[column-fill:_balance] gap-4 [column-count:1] sm:[column-count:2] lg:[column-count:3] xl:[column-count:4]"
+              className="relative"
             >
-              {tab === "posters" &&
-                posterItems.map((it, i) => (
-                  <ImageCard key={it.url} item={it} onOpen={open} index={i} />
-                ))}
-              {tab === "illustrations" &&
-                ILLUSTRATIONS.map((it, i) => (
-                  <ImageCard key={it.url} item={it} onOpen={open} index={i} />
-                ))}
-              {tab === "motion" &&
-                VIDEOS.map((it, i) => (
-                  <VideoCard key={it.url} item={it} onOpen={open} index={i} />
-                ))}
+              <div className="[column-fill:_balance] gap-4 [column-count:1] sm:[column-count:2] lg:[column-count:3] xl:[column-count:4]">
+                {visibleItems.map((it, i) =>
+                  tab === "motion" ? (
+                    <VideoCard key={it.url} item={it} onOpen={open} index={i} />
+                  ) : (
+                    <ImageCard key={it.url} item={it} onOpen={open} index={i} />
+                  )
+                )}
+              </div>
+
+              {/* Fade the lower edge so the next set peeks through, then stops. */}
+              {!showAll && hasMore && (
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-abyss via-abyss/85 to-transparent" />
+              )}
             </motion.div>
           </AnimatePresence>
+
+          {hasMore && (
+            <div className="mt-8 flex justify-center">
+              <button
+                onClick={() => setShowAll((v) => !v)}
+                className="group inline-flex items-center gap-2.5 rounded-full border border-tide/30 bg-deep/30 px-6 py-3 font-mono text-[12px] uppercase tracking-widest2 text-mist backdrop-blur-sm transition-colors hover:border-tide hover:text-foam"
+              >
+                {showAll ? "Show less" : "View all Projects"}
+                {!showAll && (
+                  <span className="font-mono text-[11px] text-tide">
+                    {activeItems.length}
+                  </span>
+                )}
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className={`transition-transform duration-300 ${showAll ? "rotate-180" : ""}`}
+                >
+                  <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>

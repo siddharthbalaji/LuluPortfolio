@@ -182,7 +182,7 @@ export const NAV_LINKS = [
   { href: "#work", label: "Work" },
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
-  { href: "#art", label: "Art" },
+  { href: "#illustrations", label: "Illustration" },
   { href: "#skills", label: "Skills" },
   { href: "#brand", label: "Brand" },
 ];

@@ -98,7 +98,10 @@ export default function ArtFeed() {
 
         <div className="mt-14 grid items-center gap-10 lg:grid-cols-[minmax(0,420px)_1fr] lg:gap-14">
           {/* ───────────────── Instagram-style post card ───────────────── */}
-          <motion.article
+          {/* Plain <article> on purpose: this node carries `data-reveal`, whose
+              opacity is driven by GSAP. Making it a framer `motion` element would
+              let framer also claim the node's inline style and fight the reveal. */}
+          <article
             data-reveal
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
@@ -231,7 +234,7 @@ export default function ArtFeed() {
                 {active + 1} / {ART.length} · digital illustration
               </div>
             </div>
-          </motion.article>
+          </article>
 
           {/* ───────────────── Auto-cycling horizontal carousel ───────────────── */}
           <div

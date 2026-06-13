@@ -182,10 +182,7 @@ export const NAV_LINKS = [
   { href: "#work", label: "Work" },
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
-<<<<<<< HEAD
   { href: "#illustrations", label: "Illustration" },
-=======
->>>>>>> 4ed7448c4550cb9d4351660fabe8b3f8d972eaa8
   { href: "#skills", label: "Skills" },
   { href: "#brand", label: "Brand" },
 ];

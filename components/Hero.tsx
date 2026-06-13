@@ -1,14 +1,18 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
-import { PROFILE, ROLES, STATS } from "@/lib/content";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { PROFILE, STATS } from "@/lib/content";
 import CountUp from "@/components/ui/CountUp";
 
 // The WebGL surface is client-only and below the fold of the text content.
 const WaterScene = dynamic(() => import("@/components/three/WaterScene"), {
   ssr: false,
 });
+
+// The first word of the headline cycles through the disciplines.
+const ROTATING = ["Motion", "Visual", "Product", "Graphic", "Brand"];
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
@@ -19,12 +23,93 @@ const fade = {
   }),
 };
 
+function RotatingWord({ words, interval = 2200 }: { words: string[]; interval?: number }) {
+  const [i, setI] = useState(0);
+  const [glitch, setGlitch] = useState(false);
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    if (reduced) return; // respect reduced motion — hold on the first word
+    let settle: ReturnType<typeof setTimeout>;
+    const id = setInterval(() => {
+      setI((p) => (p + 1) % words.length);
+      setGlitch(true);
+      settle = setTimeout(() => setGlitch(false), 420);
+    }, interval);
+    return () => {
+      clearInterval(id);
+      clearTimeout(settle);
+    };
+  }, [reduced, words.length, interval]);
+
+  const word = words[i];
+
+  return (
+    <span className="lulu-rot relative inline-block">
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={word}
+          data-text={word}
+          initial={{ opacity: 0, y: "0.5em", filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, y: "-0.5em", filter: "blur(8px)" }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className={`lulu-word inline-block text-foam ${glitch ? "is-glitch" : ""}`}
+        >
+          {word}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
+}
+
 export default function Hero() {
   return (
-    <section
-      id="top"
-      className="relative min-h-[100svh] overflow-hidden bg-abyss"
-    >
+    <section id="top" className="relative min-h-[100svh] overflow-hidden bg-abyss">
+      {/* glitch keyframes — tinted to the water palette, gated behind reduced-motion */}
+      <style>{`
+        .lulu-word::before,
+        .lulu-word::after {
+          content: attr(data-text);
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .lulu-word.is-glitch::before {
+            color: #4A7FA7;
+            animation: luluGlitchA 0.42s steps(2, end);
+          }
+          .lulu-word.is-glitch::after {
+            color: #B3CFE5;
+            animation: luluGlitchB 0.42s steps(2, end);
+          }
+        }
+        @keyframes luluGlitchA {
+          0%   { opacity: 0;   transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
+          25%  { opacity: .65; transform: translate(-2px, 1px); clip-path: inset(0 0 64% 0); }
+          50%  { opacity: .45; transform: translate(2px, -1px); clip-path: inset(56% 0 0 0); }
+          75%  { opacity: .55; transform: translate(-1px, 0);   clip-path: inset(28% 0 42% 0); }
+          100% { opacity: 0;   transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
+        }
+        @keyframes luluGlitchB {
+          0%   { opacity: 0;   transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
+          25%  { opacity: .5;  transform: translate(2px, -1px); clip-path: inset(52% 0 0 0); }
+          50%  { opacity: .6;  transform: translate(-2px, 1px); clip-path: inset(0 0 58% 0); }
+          75%  { opacity: .4;  transform: translate(1px, 0);    clip-path: inset(40% 0 26% 0); }
+          100% { opacity: 0;   transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
+        }
+      `}</style>
+
       {/* Reflective water — the signature motif */}
       <div className="absolute inset-0 z-0 opacity-90">
         <WaterScene />
@@ -40,6 +125,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-[2] mx-auto flex min-h-[100svh] max-w-[1280px] flex-col justify-end px-6 pb-20 pt-32 sm:px-10 lg:pb-28">
+        {/* Eyebrow */}
         <motion.div
           custom={0}
           variants={fade}
@@ -53,62 +139,34 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* Mirrored title — the reflection made literal */}
-        <div className="relative">
-          <motion.h1
-            custom={1}
-            variants={fade}
-            initial="hidden"
-            animate="show"
-            className="relative font-display text-[clamp(58px,11vw,150px)] font-light leading-[0.86] tracking-tight text-foam"
-          >
-            {PROFILE.titleLead}
-            <span className="text-tide"> </span>
-            <br />
-            <em className="italic text-mist">{PROFILE.titleTail}</em>
-          </motion.h1>
-          {/* the echo */}
-          <div
-            aria-hidden
-            className="absolute left-0 top-full -mt-2 hidden select-none font-display text-[clamp(58px,11vw,150px)] font-light leading-[0.86] tracking-tight text-foam/[0.08] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.8),transparent_55%)] [transform:scaleY(-1)] sm:block"
-          >
-            {PROFILE.titleLead}
-            <br />
-            <em className="italic">{PROFILE.titleTail}</em>
-          </div>
-        </div>
+        {/* Headline — rotating discipline above the fixed role */}
+        <motion.h1
+          custom={1}
+          variants={fade}
+          initial="hidden"
+          animate="show"
+          className="font-display text-[clamp(58px,11vw,150px)] font-light leading-[0.86] tracking-tight text-foam"
+        >
+          <span className="block">
+            <RotatingWord words={ROTATING} />
+          </span>
+          <em className="block italic text-mist">Designer.</em>
+        </motion.h1>
 
+        {/* Intro */}
         <motion.p
           custom={2}
           variants={fade}
           initial="hidden"
           animate="show"
-          className="mt-8 max-w-[440px] text-[15px] font-light leading-relaxed text-mist/85"
+          className="mt-8 max-w-[460px] text-[15px] font-light leading-relaxed text-mist/85"
         >
           {PROFILE.tagline}
         </motion.p>
 
-        {/* role pills */}
+        {/* Stats */}
         <motion.div
           custom={3}
-          variants={fade}
-          initial="hidden"
-          animate="show"
-          className="mt-8 flex flex-wrap gap-2.5"
-        >
-          {ROLES.map((r) => (
-            <span
-              key={r}
-              className="rounded-full border border-tide/25 bg-deep/30 px-3.5 py-1.5 font-mono text-[12px] tracking-wide text-mist/80 backdrop-blur-sm"
-            >
-              {r}
-            </span>
-          ))}
-        </motion.div>
-
-        {/* stats */}
-        <motion.div
-          custom={4}
           variants={fade}
           initial="hidden"
           animate="show"

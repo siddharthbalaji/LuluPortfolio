@@ -4,6 +4,7 @@ import Marquee from "@/components/Marquee";
 import Work from "@/components/Work";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
+import ArtFeed from "@/components/ArtFeed";
 import Skills from "@/components/Skills";
 import Education from "@/components/Education";
 import Brand from "@/components/Brand";
@@ -21,6 +22,7 @@ export default function Page() {
         <Work />
         <About />
         <Experience />
+        <ArtFeed />
         <Skills />
         <Education />
         <Brand />

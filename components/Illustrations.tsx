@@ -16,7 +16,7 @@ import { Eyebrow, Heading } from "@/components/ui/Section";
 const SHOWN = 7; // odd number = clean centre + symmetric peeks
 const REEL: Media[] = ILLUSTRATIONS.slice(0, SHOWN);
 
-const DURATION = 24; // seconds for one full loop
+const DURATION = 16; // seconds for one full loop
 const HOLD = 3; // % "dwell" offset at each position (the SCSS slide-change-timing)
 const EASING = "cubic-bezier(0.37, 0, 0.63, 1)";
 
@@ -52,7 +52,10 @@ ${keyframes(ANIM, SHOWN)}
   opacity:0;will-change:transform,opacity;
   animation:${ANIM} ${DURATION}s ${EASING} infinite;
 }
-.lulu-reel:hover .lulu-reel__item{animation-play-state:paused;}
+.lulu-reel:hover .lulu-reel__item{animation-play-state:running;}
+@media (hover: hover) and (pointer: fine){
+  .lulu-reel:hover .lulu-reel__item{animation-play-state:paused;}
+}
 .lulu-reel__frame{
   width:100%;height:100%;overflow:hidden;border-radius:18px;
   border:1px solid rgba(246,250,253,.10);background:rgba(26,61,99,.20);

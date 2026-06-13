@@ -2,16 +2,15 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { POSTER_GROUPS, ILLUSTRATIONS, VIDEOS, type Media } from "@/lib/media";
+import { POSTER_GROUPS, VIDEOS, type Media } from "@/lib/media";
 import { thumb, poster } from "@/lib/cloudinary";
 import { useUI } from "@/lib/store";
 import { Eyebrow, Heading } from "@/components/ui/Section";
 
-type Tab = "posters" | "illustrations" | "motion";
+type Tab = "posters" | "motion";
 
 const TABS: { id: Tab; label: string; count: number }[] = [
   { id: "posters", label: "Posters", count: POSTER_GROUPS.reduce((a, g) => a + g.items.length, 0) },
-  { id: "illustrations", label: "Illustration", count: ILLUSTRATIONS.length },
   { id: "motion", label: "Motion", count: VIDEOS.length },
 ];
 
@@ -49,7 +48,6 @@ export default function Work() {
 
   // The list backing the active tab.
   const activeItems = useMemo<Media[]>(() => {
-    if (tab === "illustrations") return ILLUSTRATIONS;
     if (tab === "motion") return VIDEOS;
     return posterItems;
   }, [tab, posterItems]);

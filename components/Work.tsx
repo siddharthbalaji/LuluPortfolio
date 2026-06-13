@@ -17,13 +17,13 @@ const TABS: { id: Tab; label: string; count: number }[] = [
 
 const POSTER_CATS = ["All", ...POSTER_GROUPS.map((g) => g.category)];
 
-// How many items to show before "View all": fewer on small screens, max 6 on large.
+// How many items to show before "View all": fewer on small screens, up to 8 on large.
 function useCollapsedCount() {
-  const [count, setCount] = useState(6); // desktop default (matches SSR markup)
+  const [count, setCount] = useState(8); // desktop default (matches SSR markup)
   useEffect(() => {
     const lg = window.matchMedia("(min-width: 1024px)");
     const sm = window.matchMedia("(min-width: 640px)");
-    const update = () => setCount(lg.matches ? 6 : sm.matches ? 4 : 2);
+    const update = () => setCount(lg.matches ? 8 : sm.matches ? 6 : 4);
     update();
     lg.addEventListener("change", update);
     sm.addEventListener("change", update);

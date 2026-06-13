@@ -4,7 +4,10 @@ import Marquee from "@/components/Marquee";
 import Work from "@/components/Work";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
+<<<<<<< HEAD
 import Illustrations from "@/components/Illustrations";
+=======
+>>>>>>> 4ed7448c4550cb9d4351660fabe8b3f8d972eaa8
 import Skills from "@/components/Skills";
 import Education from "@/components/Education";
 import Brand from "@/components/Brand";
@@ -22,7 +25,10 @@ export default function Page() {
         <Work />
         <About />
         <Experience />
+<<<<<<< HEAD
         <Illustrations />
+=======
+>>>>>>> 4ed7448c4550cb9d4351660fabe8b3f8d972eaa8
         <Skills />
         <Education />
         <Brand />

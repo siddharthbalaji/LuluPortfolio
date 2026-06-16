@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PROFILE, NAV_LINKS } from "@/lib/content";
+import LogoMark from "@/components/LogoMark";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -26,8 +27,11 @@ export default function Nav() {
       >
         <nav className="mx-auto flex max-w-[1280px] items-center justify-between px-6 sm:px-10">
           <a href="#top" className="group flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-lg border border-tide/30 bg-deep/40 font-jp text-[15px] leading-none text-mist transition-colors group-hover:border-tide group-hover:text-foam">
-              ル
+            <span className="relative grid h-9 w-9 place-items-center rounded-lg border border-tide/30 bg-gradient-to-br from-deep/60 to-abyss/60 p-[5px] transition-all duration-300 group-hover:border-tide group-hover:shadow-[0_0_18px_-2px_rgba(74,127,167,0.6)]">
+              <LogoMark
+                variant="white"
+                className="h-full w-full object-contain opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+              />
             </span>
             <span className="leading-tight">
               <span className="block font-display text-[17px] font-medium text-foam">

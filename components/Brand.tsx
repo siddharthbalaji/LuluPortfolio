@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { BRAND } from "@/lib/content";
 import { Eyebrow, Heading } from "@/components/ui/Section";
 import { useReveal } from "@/hooks/useReveal";
+import LogoMark from "@/components/LogoMark";
 
 export default function Brand() {
   const ref = useReveal<HTMLDivElement>({ stagger: 0.12 });
@@ -25,24 +26,34 @@ export default function Brand() {
         </p>
 
         <div className="mt-16 grid items-center gap-16 lg:grid-cols-[440px_1fr]">
-          {/* The reflection construction */}
+          {/* The reflection construction — now built on the real mark */}
           <div data-reveal className="relative grid place-items-center">
-            <div className="relative grid place-items-center rounded-3xl border border-foam/10 bg-abyss/50 px-10 py-16">
-              <span className="font-jp text-[150px] leading-[0.8] text-foam">ル</span>
-              {/* the 180° reflected echo that completes ルル */}
-              <motion.span
-                initial={{ opacity: 0, rotate: 0, y: -40 }}
-                whileInView={{ opacity: 0.5, rotate: 180, y: 0 }}
-                viewport={{ once: true, margin: "-20%" }}
-                transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-                className="font-jp text-[150px] leading-[0.8] text-tide"
-              >
-                ル
-              </motion.span>
-              {/* still-water line */}
-              <span className="absolute left-8 right-8 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-tide/40 to-transparent" />
+            <div className="relative grid place-items-center overflow-hidden rounded-3xl border border-foam/10 bg-abyss/50 px-10 py-16">
+              {/* soft tide swell behind the mark */}
+              <div className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-tide/15 blur-3xl" />
+
+              <div className="relative z-[1] flex flex-col items-center">
+                {/* the finished mark, gently floating */}
+                <LogoMark
+                  variant="gradient"
+                  className="h-40 w-40 animate-floaty drop-shadow-[0_0_28px_rgba(74,127,167,0.4)]"
+                />
+                {/* still-water line */}
+                <span className="my-2 h-px w-44 bg-gradient-to-r from-transparent via-tide/50 to-transparent" />
+                {/* the mirrored, fading echo beneath — the signature reflection */}
+                <motion.div
+                  initial={{ opacity: 0, y: -24 }}
+                  whileInView={{ opacity: 0.22, y: 0 }}
+                  viewport={{ once: true, margin: "-20%" }}
+                  transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+                  className="h-40 w-40 origin-top -scale-y-100 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9),transparent_72%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9),transparent_72%)]"
+                >
+                  <LogoMark variant="gradient" className="h-full w-full" />
+                </motion.div>
+              </div>
+
               <span className="absolute bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-widest2 text-tide">
-                180° reflection → ルル
+                ルル · the finished mark
               </span>
             </div>
           </div>

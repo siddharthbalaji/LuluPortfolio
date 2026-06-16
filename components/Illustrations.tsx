@@ -43,6 +43,7 @@ export default function Illustrations() {
               images={DOME_IMAGES}
               fit={0.5}
               minRadius={600}
+              segments={20}
               grayscale={false}
               overlayBlurColor="#0A1931"
               imageBorderRadius="18px"

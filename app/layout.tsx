@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { display, sans, mono, jp } from "@/lib/fonts";
 import { PROFILE } from "@/lib/content";
-import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -44,7 +43,7 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased bg-abyss text-foam selection:bg-tide/50">
         <div className="grain" aria-hidden />
-        <SmoothScroll>{children}</SmoothScroll>
+        {children}
       </body>
     </html>
   );

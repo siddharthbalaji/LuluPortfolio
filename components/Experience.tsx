@@ -437,9 +437,9 @@ export default function Experience({
                   }}
                   className={cx(
                     "absolute -translate-x-1/2 -translate-y-1/2 scale-[0.4] rounded-full border border-tide bg-abyss opacity-0 will-change-transform",
-                    "shadow-[0_0_0_5px_#0A1931]",
                     "transition duration-500",
-                    "data-[on=true]:scale-100 data-[on=true]:opacity-100",
+                    "data-[on=true]:scale-100 data-[on=true]:opacity-100 data-[on=true]:border-foam data-[on=true]:bg-foam",
+                    "data-[on=true]:shadow-[0_0_12px_3px_rgba(246,250,253,0.5)]",
                     "motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:transition-none"
                   )}
                 />

@@ -12,7 +12,7 @@ export const PROFILE = {
     "A product-focused visual designer working across UI/UX, motion, and illustration — fluent in the AI tools reshaping how we design.",
   quote: "I often tell myself that everything you can imagine is real.",
   bio: [
-    "I'm a product-focused visual designer with a background spanning UI/UX, graphic design, illustration, and motion graphics. My MA in Illustration & Animation from Coventry University sharpened my craft and storytelling instincts, while my Computer Science engineering degree gives me a strong technical foundation.",
+    "I'm a product-focused visual designer with a background spanning UI/UX, graphic design, illustration, and motion graphics. Strong in animation, storytelling, and interface design, I deliver polished, detail-driven work that balances aesthetics, usability, and innovation.",
     "I bring a detail-driven approach that balances aesthetics, usability, and innovation — and I'm fluent in the latest AI tools reshaping how we design.",
   ],
   location: "Chennai, India",
@@ -21,6 +21,21 @@ export const PROFILE = {
   phoneHref: "+917338902566",
   linkedin: "https://www.linkedin.com/in/siddharthbalaji/",
   linkedinLabel: "linkedin.com/in/siddharthbalaji",
+};
+
+// X-style "post" card shown in the About section. The display name and handle
+// are intentionally separate from PROFILE.name (which feeds Nav / Footer / SEO).
+// `time` and `stats` are decorative chrome for the card — edit freely.
+export const XCARD = {
+  displayName: "Siddharth",
+  handle: "@lulusidd",
+  verified: true,
+  avatar:
+    "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/v1781677219/X_Profile_luxp8e.png",
+  verifiedBadge:
+    "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/v1781677218/Verified_tiys8z.png",
+  time: "9:24 AM · Mar 4, 2026",
+  stats: { replies: 32, reposts: 124, likes: 940 },
 };
 
 export const ROLES = [
@@ -46,19 +61,19 @@ export const MARQUEE = [
 export const TRAITS = [
   {
     name: "Motion-First Thinker",
-    desc: "Animation and motion graphics aren't an afterthought — they're central to how I communicate ideas and emotion in design.",
+    desc: "Animation and motion graphics are central to how I communicate ideas and emotion.",
   },
   {
-    name: "AI-Augmented Creator",
-    desc: "I actively integrate MidJourney, Adobe Firefly, Runway, and Claude into my workflow to accelerate ideation and push creative limits.",
+    name: "Interface & Interaction",
+    desc: "I design usable, polished interfaces where every transition feels considered.",
   },
   {
     name: "Storyteller at Heart",
-    desc: "From storyboarding animation series to crafting social video ads, I design narratives — not just interfaces.",
+    desc: "From storyboards to social video ads, I design narratives — not just screens.",
   },
   {
-    name: "Cross-Disciplinary",
-    desc: "With roots in computer science and a master's in illustration, I bridge technical constraints with creative ambition.",
+    name: "AI-Augmented Creator",
+    desc: "I fold MidJourney, Firefly, Runway, and Claude into my process to push ideas further.",
   },
 ];
 

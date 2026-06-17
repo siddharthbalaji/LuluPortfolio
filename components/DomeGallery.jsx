@@ -122,7 +122,9 @@ export default function DomeGallery({
   openedImageHeight = '350px',
   imageBorderRadius = '30px',
   openedImageBorderRadius = '30px',
-  grayscale = true
+  grayscale = true,
+  autoRotate = true,
+  autoRotateSpeed = 5
 }) {
   const rootRef = useRef(null);
   const mainRef = useRef(null);
@@ -139,6 +141,7 @@ export default function DomeGallery({
   const draggingRef = useRef(false);
   const movedRef = useRef(false);
   const inertiaRAF = useRef(null);
+  const autoRAF = useRef(null);
   const openingRef = useRef(false);
   const openStartedAtRef = useRef(0);
   const lastDragEndAt = useRef(0);
@@ -254,6 +257,38 @@ export default function DomeGallery({
   useEffect(() => {
     applyTransform(rotationRef.current.x, rotationRef.current.y);
   }, []);
+
+  // Ambient auto-spin: drift the sphere horizontally so it reads as alive
+  // and inviting. Yields completely to the user — pauses during drag, while
+  // inertia is still settling, and whenever a tile is enlarged — then picks
+  // back up on its own. Honors prefers-reduced-motion by not running at all.
+  useEffect(() => {
+    if (!autoRotate) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let last = performance.now();
+    const step = now => {
+      const dt = Math.min(0.05, (now - last) / 1000); // clamp tab-refocus jumps
+      last = now;
+      const idle =
+        !draggingRef.current &&
+        !inertiaRAF.current &&
+        !focusedElRef.current &&
+        !openingRef.current &&
+        rootRef.current?.getAttribute('data-enlarging') !== 'true';
+      if (idle) {
+        const nextY = wrapAngleSigned(rotationRef.current.y + autoRotateSpeed * dt);
+        rotationRef.current = { x: rotationRef.current.x, y: nextY };
+        applyTransform(rotationRef.current.x, nextY);
+      }
+      autoRAF.current = requestAnimationFrame(step);
+    };
+    autoRAF.current = requestAnimationFrame(step);
+    return () => {
+      if (autoRAF.current) cancelAnimationFrame(autoRAF.current);
+      autoRAF.current = null;
+    };
+  }, [autoRotate, autoRotateSpeed]);
 
   const stopInertia = useCallback(() => {
     if (inertiaRAF.current) {

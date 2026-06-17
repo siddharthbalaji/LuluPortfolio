@@ -20,6 +20,9 @@ type Tokens = {
   pathWidth: number; // spine stroke width
   dash: string; // visible dash pattern
   dotSize: number; // px diameter of a node
+  glowColor: string; // soft mist trail behind the drawn path
+  glowWidth: number; // glow stroke width
+  glowBlur: number; // glow gaussian blur radius
   weaveDesktop: number; // horizontal ripple amplitude (desktop)
   weaveMobile: number; // horizontal ripple amplitude (mobile)
   revealLine: number; // 0..1 viewport fraction the draw-front rides
@@ -37,6 +40,9 @@ const DEFAULT_TOKENS: Tokens = {
   pathWidth: 1.5,
   dash: "5 4",
   dotSize: 13,
+  glowColor: "rgba(179,207,229,0.16)",
+  glowWidth: 7,
+  glowBlur: 4,
   weaveDesktop: 20,
   weaveMobile: 10,
   revealLine: 0.82,
@@ -257,7 +263,28 @@ export default function Experience({
                 <clipPath id="exp-spine-clip">
                   <rect ref={rectRef} x="0" y="0" width={geo.w} />
                 </clipPath>
+                <filter
+                  id="exp-spine-glow"
+                  x="-50%"
+                  y="-50%"
+                  width="200%"
+                  height="200%"
+                >
+                  <feGaussianBlur stdDeviation={T.glowBlur} />
+                </filter>
               </defs>
+              {/* Faint mist trail: a soft, undashed halo that only shows
+                  behind the drawn portion (shares the reveal clip), so the
+                  spine reads like a settling reflection on still water. */}
+              <path
+                d={geo.path}
+                fill="none"
+                stroke={T.glowColor}
+                strokeWidth={T.glowWidth}
+                strokeLinecap="round"
+                filter="url(#exp-spine-glow)"
+                clipPath="url(#exp-spine-clip)"
+              />
               <path
                 d={geo.path}
                 fill="none"

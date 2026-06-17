@@ -36,12 +36,12 @@ const DEFAULT_TOKENS: Tokens = {
   cardGap: 26,
   cardPad: 24,
   channel: 50,
-  pathColor: "rgba(74,127,167,0.55)",
+  pathColor: "rgba(74,127,167,0.7)",
   pathWidth: 1.5,
   dash: "5 4",
   dotSize: 13,
-  glowColor: "rgba(179,207,229,0.16)",
-  glowWidth: 7,
+  glowColor: "rgba(108,164,206,0.55)",
+  glowWidth: 8,
   glowBlur: 4,
   weaveDesktop: 20,
   weaveMobile: 10,
@@ -437,6 +437,7 @@ export default function Experience({
                   }}
                   className={cx(
                     "absolute -translate-x-1/2 -translate-y-1/2 scale-[0.4] rounded-full border border-tide bg-abyss opacity-0 will-change-transform",
+                    "shadow-[0_0_0_5px_#0A1931]",
                     "transition duration-500",
                     "data-[on=true]:scale-100 data-[on=true]:opacity-100",
                     "motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:transition-none"

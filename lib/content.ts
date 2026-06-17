@@ -30,6 +30,10 @@ export const XCARD = {
   displayName: "Siddharth",
   handle: "@lulusidd",
   verified: true,
+  avatar:
+    "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/v1781677219/X_Profile_luxp8e.png",
+  verifiedBadge:
+    "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/v1781677218/Verified_tiys8z.png",
   time: "9:24 AM · Mar 4, 2026",
   stats: { replies: 32, reposts: 124, likes: 940 },
 };

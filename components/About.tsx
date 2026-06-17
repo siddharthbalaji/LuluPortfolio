@@ -8,15 +8,6 @@ import { useReveal } from "@/hooks/useReveal";
    matching the existing inline-SVG approach already used in this file. */
 type IconProps = { className?: string };
 
-function IconVerified({ className = "" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <circle cx="12" cy="12" r="10" fill="currentColor" />
-      <path d="m8 12 3 3 5-6" fill="none" stroke="#0A1931" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function IconX({ className = "" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
@@ -97,13 +88,25 @@ export default function About() {
           <div data-reveal className="lg:col-span-2">
             <article className="rounded-2xl border border-foam/10 bg-deep p-6 sm:p-8">
               <header className="flex items-start gap-3">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border-[1.5px] border-tide bg-abyss font-display text-lg text-mist">
-                  {PROFILE.aliasGlyph}
-                </span>
+                <img
+                  src={XCARD.avatar}
+                  alt={PROFILE.name}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-12 w-12 shrink-0 rounded-full border-[1.5px] border-tide object-cover"
+                />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5 font-medium text-foam">
                     {XCARD.displayName}
-                    {XCARD.verified && <IconVerified className="h-[18px] w-[18px] text-tide" />}
+                    {XCARD.verified && (
+                      <img
+                        src={XCARD.verifiedBadge}
+                        alt="Verified"
+                        loading="lazy"
+                        decoding="async"
+                        className="h-[18px] w-[18px] [mix-blend-mode:screen]"
+                      />
+                    )}
                   </div>
                   <div className="text-sm text-mist/60">{XCARD.handle}</div>
                 </div>

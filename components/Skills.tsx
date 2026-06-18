@@ -148,17 +148,35 @@ export default function Skills() {
               <span className="st-light st-g" />
             </div>
             <div className="st-nav">
+              {/* sidebar toggle */}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5" /><line x1="9" y1="5" x2="9" y2="19" /></svg>
+              {/* back */}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+              {/* forward (disabled) */}
+              <svg className="st-dim" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
             </div>
-            <div className="st-url">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm3 8H9V6a3 3 0 0 1 6 0z" /></svg>
-              siddharthbalaji.com
+            <div className="st-addr">
+              {/* privacy shield */}
+              <span className="st-shield">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" /><line x1="12" y1="3.4" x2="12" y2="19.6" /></svg>
+              </span>
+              <div className="st-url">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm3 8H9V6a3 3 0 0 1 6 0z" /></svg>
+                lulusidd.com
+                <span className="st-reload">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7" /><path d="M21 4v5h-5" /></svg>
+                </span>
+              </div>
             </div>
             <div className="st-tools">
+              {/* download */}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8v7M8.5 11.5L12 15l3.5-3.5" /></svg>
+              {/* share */}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /><path d="M16 6l-4-4-4 4" /><path d="M12 2v14" /></svg>
+              {/* new tab */}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14" /></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
+              {/* tab overview */}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="3" width="13" height="13" rx="2.5" /><rect x="3" y="8" width="13" height="13" rx="2.5" /></svg>
             </div>
           </div>
 
@@ -236,8 +254,13 @@ const CSS = `
 .st-r{background:#ff5f57}.st-y{background:#febc2e}.st-g{background:#28c840}
 .st-nav{display:flex;gap:14px;color:rgba(255,255,255,.4);margin-left:6px}
 .st-nav svg{width:16px;height:16px}
-.st-url{flex:1;max-width:520px;margin:0 auto;height:30px;border-radius:8px;background:rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;gap:7px;color:rgba(255,255,255,.72);font-family:var(--font-sans),system-ui,sans-serif;font-size:13px}
+.st-addr{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;min-width:0}
+.st-shield{display:flex;color:rgba(255,255,255,.4)}
+.st-shield svg{width:16px;height:16px}
+.st-dim{opacity:.55}
+.st-url{position:relative;width:100%;max-width:480px;height:30px;border-radius:8px;background:rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;gap:7px;color:rgba(255,255,255,.72);font-family:var(--font-sans),system-ui,sans-serif;font-size:13px}
 .st-url svg{width:11px;height:11px;opacity:.6}
+.st-reload{position:absolute;right:9px;top:50%;transform:translateY(-50%);display:flex}
 .st-tools{display:flex;gap:16px;color:rgba(255,255,255,.4);margin-left:auto}
 .st-tools svg{width:16px;height:16px}
 

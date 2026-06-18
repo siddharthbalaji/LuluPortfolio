@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { Eyebrow, Heading } from "@/components/ui/Section";
 import { useReveal } from "@/hooks/useReveal";
 
@@ -120,6 +121,21 @@ const CARDS: Card[] = [
 
 export default function Skills() {
   const ref = useReveal<HTMLDivElement>({ stagger: 0.12 });
+  const canvasRef = useRef<HTMLDivElement>(null);
+
+  // Only run the floater/ripple animations (and the backdrop-filter recompositing
+  // they trigger) while the canvas is actually on screen. Off-screen, the compositor
+  // would otherwise keep re-blurring the glass cards every frame for nothing.
+  useEffect(() => {
+    const el = canvasRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => el.classList.toggle("st-live", entry.isIntersecting),
+      { threshold: 0.01 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
     <section
@@ -189,7 +205,7 @@ export default function Skills() {
           </div>
 
           {/* water canvas */}
-          <div className="st-canvas">
+          <div className="st-canvas" ref={canvasRef}>
             <div className="st-ripples" aria-hidden>
               <span style={{ width: 340, height: 340 }} />
               <span style={{ width: 560, height: 560 }} />
@@ -278,7 +294,7 @@ const CSS = `
 
 .st-floater{position:absolute;z-index:15;will-change:transform}
 .st-back{z-index:8}.st-echo{z-index:4}
-.st-tile{border-radius:24%;background:rgba(247,251,255,.92);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);
+.st-tile{border-radius:24%;background:rgba(247,251,255,.92);display:flex;align-items:center;justify-content:center;
   box-shadow:0 10px 24px -8px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.6)}
 .st-tile img{width:62%;height:62%;object-fit:contain}
 .st-back .st-tile{opacity:.7;filter:saturate(.85)}
@@ -291,8 +307,14 @@ const CSS = `
 .st-bobB{animation:st-bobB 9s ease-in-out infinite}
 .st-bobC{animation:st-bobC 6s ease-in-out infinite}
 
+/* Idle until the canvas scrolls into view, then again once it leaves. Stops the
+   compositor from re-blurring the glass cards every frame while off-screen. */
+.st-canvas:not(.st-live) .st-bobA,
+.st-canvas:not(.st-live) .st-bobB,
+.st-canvas:not(.st-live) .st-bobC{animation-play-state:paused}
+
 .st-cluster{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:368px;z-index:20;display:flex;flex-direction:column;align-items:center}
-.st-ncard{width:344px;background:rgba(244,249,253,.72);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-radius:20px;padding:14px 16px 13px;border:1px solid rgba(255,255,255,.5);
+.st-ncard{width:344px;background:rgba(244,249,253,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:20px;padding:14px 16px 13px;border:1px solid rgba(255,255,255,.5);
   box-shadow:0 1px 1px rgba(255,255,255,.5) inset, 0 22px 48px -16px rgba(4,12,28,.62)}
 .st-ncard + .st-ncard{margin-top:-18px}
 .st-ncard:nth-child(1){transform:rotate(-3deg) translateX(-12px);z-index:23}

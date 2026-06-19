@@ -6,8 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { PROFILE, STATS } from "@/lib/content";
 import CountUp from "@/components/ui/CountUp";
 
-// The WebGL surface is client-only and below the fold of the text content.
-const WaterScene = dynamic(() => import("@/components/three/WaterScene"), {
+// The WebGL surface is client-only and sits behind the hero text.
+const LineWaves = dynamic(() => import("@/components/three/LineWaves"), {
   ssr: false,
 });
 
@@ -110,9 +110,18 @@ export default function Hero() {
         }
       `}</style>
 
-      {/* Reflective water — the signature motif */}
+      {/* Reflective line-waves — the signature motif */}
       <div className="absolute inset-0 z-0 opacity-90">
-        <WaterScene />
+        <LineWaves
+          color1="#B3CFE5"
+          color2="#4A7FA7"
+          color3="#F6FAFD"
+          brightness={0.26}
+          speed={0.3}
+          rotation={-45}
+          warp={1.0}
+          mouseInfluence={1.5}
+        />
       </div>
       {/* depth gradient so text stays legible over the surface */}
       <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-abyss/85 via-abyss/35 to-abyss/95" />

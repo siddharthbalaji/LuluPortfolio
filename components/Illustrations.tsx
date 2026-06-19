@@ -33,7 +33,7 @@ export default function Illustrations() {
           </Heading>
           <p className="max-w-sm text-[15px] font-light leading-relaxed text-mist/70">
             Character studies, brand pieces and experiments — wrapped onto a
-            dome. Drag to spin it; tap a piece to open it.
+            dome that turns on its own.
           </p>
         </div>
 
@@ -52,6 +52,7 @@ export default function Illustrations() {
               openedImageHeight="560px"
               maxVerticalRotationDeg={6}
               dragDampening={2}
+              interactive={false}
             />
           </div>
         </div>

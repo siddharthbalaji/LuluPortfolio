@@ -124,7 +124,8 @@ export default function DomeGallery({
   openedImageBorderRadius = '30px',
   grayscale = true,
   autoRotate = true,
-  autoRotateSpeed = 5
+  autoRotateSpeed = 5,
+  interactive = true
 }) {
   const rootRef = useRef(null);
   const mainRef = useRef(null);
@@ -377,7 +378,7 @@ export default function DomeGallery({
         }
       }
     },
-    { target: mainRef, eventOptions: { passive: true } }
+    { target: mainRef, eventOptions: { passive: true }, enabled: interactive }
   );
 
   useEffect(() => {
@@ -637,7 +638,7 @@ export default function DomeGallery({
         ['--image-filter']: grayscale ? 'grayscale(1)' : 'none'
       }}
     >
-      <main ref={mainRef} className="sphere-main">
+      <main ref={mainRef} className="sphere-main" style={interactive ? undefined : { pointerEvents: 'none' }}>
         <div className="stage">
           <div ref={sphereRef} className="sphere">
             {items.map((it, i) => (
@@ -658,11 +659,15 @@ export default function DomeGallery({
               >
                 <div
                   className="item__image"
-                  role="button"
-                  tabIndex={0}
-                  aria-label={it.alt || 'Open image'}
-                  onClick={onTileClick}
-                  onPointerUp={onTilePointerUp}
+                  {...(interactive
+                    ? {
+                        role: 'button',
+                        tabIndex: 0,
+                        'aria-label': it.alt || 'Open image',
+                        onClick: onTileClick,
+                        onPointerUp: onTilePointerUp
+                      }
+                    : {})}
                 >
                   <img src={it.src} draggable={false} alt={it.alt} loading="lazy" decoding="async" />
                 </div>

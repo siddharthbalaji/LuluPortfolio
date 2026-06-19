@@ -122,6 +122,44 @@ const CARDS: Card[] = [
 export default function Skills() {
   const ref = useReveal<HTMLDivElement>({ stagger: 0.12 });
   const canvasRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const browserRef = useRef<HTMLDivElement>(null);
+
+  // The mockup is authored at one fixed "desktop" width and uniformly scaled
+  // down to fit narrower screens, so the composition is always identical to the
+  // PC view — just smaller. Above DESIGN_W the original fluid desktop layout is
+  // left completely untouched. Lower DESIGN_W to make everything larger on
+  // phones (at the cost of a tighter icon spread); keep it above ~700 so the
+  // floaters never collide with the cards.
+  const DESIGN_W = 960;
+  useEffect(() => {
+    const stage = stageRef.current;
+    const browser = browserRef.current;
+    if (!stage || !browser) return;
+
+    const fit = () => {
+      const w = stage.clientWidth;
+      if (w >= DESIGN_W) {
+        // wide enough: keep the desktop view exactly as-is
+        browser.style.width = "";
+        browser.style.transform = "";
+        stage.style.height = "";
+      } else {
+        const s = w / DESIGN_W;
+        browser.style.width = `${DESIGN_W}px`;
+        browser.style.transform = `scale(${s})`;
+        // collapse the empty space the unscaled box would otherwise reserve
+        stage.style.height = `${browser.offsetHeight * s}px`;
+      }
+    };
+
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(stage);
+    // webfonts can nudge the chrome height after load — refit once they settle
+    document.fonts?.ready?.then(fit).catch(() => {});
+    return () => ro.disconnect();
+  }, []);
 
   // Only run the floater/ripple animations (and the backdrop-filter recompositing
   // they trigger) while the canvas is actually on screen. Off-screen, the compositor
@@ -155,7 +193,8 @@ export default function Skills() {
           AI-assisted work.
         </p>
 
-        <div data-reveal className="st-browser mt-14">
+        <div data-reveal ref={stageRef} className="st-stage mt-14">
+          <div ref={browserRef} className="st-browser">
           {/* toolbar */}
           <div className="st-toolbar">
             <div className="st-lights">
@@ -254,6 +293,7 @@ export default function Skills() {
               ))}
             </div>
           </div>
+          </div>
         </div>
       </div>
     </section>
@@ -332,15 +372,13 @@ const CSS = `
 .st-mini{width:26px;height:26px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(0,0,0,.14), inset 0 0 0 .5px rgba(0,0,0,.05)}
 .st-mini img{width:64%;height:64%;object-fit:contain}
 
-@media (max-width:640px){
-  .st-canvas{height:520px}
-  .st-cluster{width:300px}
-  .st-ncard{width:286px}
-  .st-ntitle{font-size:16px}
-  .st-url{max-width:160px}
-  .st-tab{min-width:130px}
-  .st-ghost{display:none}
-}
+/* The whole mockup is authored at a fixed design width and uniformly scaled
+   down to fit narrower viewports (handled in JS), so the composition stays
+   identical to the desktop view at every size — nothing reflows or collapses.
+   transform-origin keeps the scaled box pinned to the stage's top-left. */
+.st-stage{position:relative;width:100%}
+.st-browser{transform-origin:top left}
+
 @media (prefers-reduced-motion:reduce){
   .st-bobA,.st-bobB,.st-bobC{animation:none}
 }

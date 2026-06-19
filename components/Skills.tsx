@@ -333,12 +333,27 @@ const CSS = `
 .st-mini img{width:64%;height:64%;object-fit:contain}
 
 @media (max-width:640px){
-  .st-canvas{height:520px}
-  .st-cluster{width:300px}
-  .st-ncard{width:286px}
+  /* The floaters can't share a narrow canvas with near-full-width cards
+     without colliding, so on phones the cards become the whole show:
+     an upright, evenly spaced vertical stack. The canvas grows to fit. */
+  .st-canvas{height:auto;padding:30px 16px}
+  .st-floater{display:none}
+  .st-ripples{opacity:.06}
+
+  .st-cluster{position:static;transform:none;width:100%;gap:14px}
+  .st-ncard{width:100%;max-width:340px;margin-inline:auto}
+  .st-ncard + .st-ncard{margin-top:0}
+  .st-ncard:nth-child(1),
+  .st-ncard:nth-child(2),
+  .st-ncard:nth-child(3){transform:none}
   .st-ntitle{font-size:16px}
-  .st-url{max-width:160px}
-  .st-tab{min-width:130px}
+
+  /* declutter the chrome to a mobile-Safari-style centered address bar:
+     drop the nav cluster, privacy shield, reload and right-side tools, and
+     let the URL pill hug its label so nothing overlaps on a narrow toolbar. */
+  .st-nav,.st-shield,.st-reload,.st-tools{display:none}
+  .st-url{width:auto;max-width:none;padding:0 14px}
+  .st-tab{min-width:0;flex:1;overflow:hidden;white-space:nowrap}
   .st-ghost{display:none}
 }
 @media (prefers-reduced-motion:reduce){

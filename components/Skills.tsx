@@ -131,7 +131,7 @@ export default function Skills() {
   // left completely untouched. Lower DESIGN_W to make everything larger on
   // phones (at the cost of a tighter icon spread); keep it above ~700 so the
   // floaters never collide with the cards.
-  const DESIGN_W = 960;
+  const DESIGN_W = 860;
   useEffect(() => {
     const stage = stageRef.current;
     const browser = browserRef.current;
@@ -325,7 +325,7 @@ const CSS = `
 .st-fav{width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#4A7FA7,#1A3D63);display:flex;align-items:center;justify-content:center;font-family:var(--font-jp),sans-serif;font-size:9px;color:#F6FAFD;font-weight:700}
 .st-ghost{background:transparent;color:rgba(255,255,255,.28);min-width:auto}
 
-.st-canvas{position:relative;height:600px;overflow:hidden;
+.st-canvas{position:relative;height:680px;overflow:hidden;
   background:radial-gradient(120% 90% at 50% -10%, #235182 0%, #14365c 38%, #0A1931 78%)}
 .st-canvas::before{content:"";position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(60% 40% at 50% 0%, rgba(179,207,229,.16), transparent 70%)}
@@ -353,23 +353,23 @@ const CSS = `
 .st-canvas:not(.st-live) .st-bobB,
 .st-canvas:not(.st-live) .st-bobC{animation-play-state:paused}
 
-.st-cluster{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:368px;z-index:20;display:flex;flex-direction:column;align-items:center}
-.st-ncard{width:344px;background:rgba(244,249,253,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:20px;padding:14px 16px 13px;border:1px solid rgba(255,255,255,.5);
+.st-cluster{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:384px;z-index:20;display:flex;flex-direction:column;align-items:center}
+.st-ncard{width:360px;background:rgba(244,249,253,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:20px;padding:16px 18px 15px;border:1px solid rgba(255,255,255,.5);
   box-shadow:0 1px 1px rgba(255,255,255,.5) inset, 0 22px 48px -16px rgba(4,12,28,.62)}
 .st-ncard + .st-ncard{margin-top:-18px}
 .st-ncard:nth-child(1){transform:rotate(-3deg) translateX(-12px);z-index:23}
 .st-ncard:nth-child(2){transform:rotate(2.5deg) translateX(14px);z-index:22}
 .st-ncard:nth-child(3){transform:rotate(-2deg) translateX(-6px);z-index:21}
 .st-nhead{display:flex;align-items:center;gap:9px;margin-bottom:8px}
-.st-appicon{width:38px;height:38px;border-radius:11px;flex:none;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.18), inset 0 0 0 .5px rgba(0,0,0,.06)}
+.st-appicon{width:42px;height:42px;border-radius:12px;flex:none;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.18), inset 0 0 0 .5px rgba(0,0,0,.06)}
 .st-appicon img{width:66%;height:66%;object-fit:contain}
 .st-nmeta{flex:1;min-width:0}
-.st-neyebrow{font-family:var(--font-mono),monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#4A7FA7;line-height:1.2}
-.st-ntitle{font-family:var(--font-display),serif;font-weight:600;font-size:18px;color:#0A1931;line-height:1.15;letter-spacing:-.01em}
-.st-ntime{font-family:var(--font-sans),system-ui,sans-serif;font-size:11px;color:#7d93ab;align-self:flex-start}
-.st-nbody{font-family:var(--font-sans),system-ui,sans-serif;font-size:13px;color:#1A3D63;line-height:1.35;margin-bottom:11px;padding-left:1px}
-.st-minirow{display:flex;gap:7px;padding-left:1px}
-.st-mini{width:26px;height:26px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(0,0,0,.14), inset 0 0 0 .5px rgba(0,0,0,.05)}
+.st-neyebrow{font-family:var(--font-mono),monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#4A7FA7;line-height:1.2}
+.st-ntitle{font-family:var(--font-display),serif;font-weight:600;font-size:21px;color:#0A1931;line-height:1.15;letter-spacing:-.01em}
+.st-ntime{font-family:var(--font-sans),system-ui,sans-serif;font-size:11.5px;color:#7d93ab;align-self:flex-start}
+.st-nbody{font-family:var(--font-sans),system-ui,sans-serif;font-size:14.5px;color:#1A3D63;line-height:1.4;margin-bottom:12px;padding-left:1px}
+.st-minirow{display:flex;gap:8px;padding-left:1px}
+.st-mini{width:29px;height:29px;border-radius:9px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(0,0,0,.14), inset 0 0 0 .5px rgba(0,0,0,.05)}
 .st-mini img{width:64%;height:64%;object-fit:contain}
 
 /* The whole mockup is authored at a fixed design width and uniformly scaled

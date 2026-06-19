@@ -205,3 +205,16 @@ main.sphere-main {
   touch-action: none;
   overscroll-behavior: none;
 }
+
+/* Display-only mode (interactive={false}): the dome still auto-rotates, but it
+   must never capture touch. sphere-main's touch-action:none would otherwise be
+   inherited by any touched tile and block page scrolling, so re-enable vertical
+   panning here and stop the tiles from acting as touch targets. */
+.sphere-root[data-interactive='false'] main.sphere-main {
+  pointer-events: none;
+  touch-action: pan-y;
+}
+.sphere-root[data-interactive='false'] .item__image {
+  pointer-events: none;
+  cursor: default;
+}

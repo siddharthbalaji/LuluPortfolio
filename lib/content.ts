@@ -160,7 +160,7 @@ export const EDUCATION = [
     date: "Sept 2023 — Sept 2024 · Coventry, UK",
     note: 'Modules in "Collaboration in Practice" and "Professional Context" built strong team management and professional design-practice skills.',
     image:
-      "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/v1781859146/CU_Image_mon7dm.png",
+      "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/CU_Image_mon7dm.png",
   },
   {
     icon: "be",
@@ -169,7 +169,7 @@ export const EDUCATION = [
     date: "Jul 2019 — Jul 2023 · Chennai, India",
     note: '"Engineering Graphics" bridged technical precision with visual communication — the backbone of my design thinking.',
     image:
-      "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/v1781859147/CIT_Image_knhwlu.png",
+      "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/CIT_Image_knhwlu.png",
   },
 ];
 

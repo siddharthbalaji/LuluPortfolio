@@ -1,14 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EDUCATION } from "@/lib/content";
 import { Eyebrow, Heading } from "@/components/ui/Section";
 import { useReveal } from "@/hooks/useReveal";
 
 export default function Education() {
   const ref = useReveal<HTMLDivElement>({ stagger: 0.12 });
-  const [active, setActive] = useState<string | null>(null);
+  const [visible, setVisible] = useState(false);
+  const [src, setSrc] = useState(EDUCATION[0]?.image ?? "");
   const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  // Preload all images so the first hover is instant.
+  useEffect(() => {
+    EDUCATION.forEach((e) => {
+      if (e.image) {
+        const img = new window.Image();
+        img.src = e.image;
+      }
+    });
+  }, []);
 
   return (
     <section
@@ -16,15 +27,15 @@ export default function Education() {
       ref={ref}
       className="relative border-t border-foam/10 bg-abyss px-6 py-24 sm:px-10 lg:py-32"
     >
-      {/* Cursor-following preview image */}
+      {/* Cursor-following preview image — src persists so no broken-icon flash on leave */}
       <img
-        src={active ?? ""}
+        src={src}
         alt=""
         aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-50 h-52 w-40 rounded-2xl border border-foam/20 object-cover shadow-2xl transition-[opacity,transform] duration-200 ease-out will-change-transform"
         style={{
-          opacity: active ? 1 : 0,
-          transform: `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(${active ? 1 : 0.85})`,
+          opacity: visible ? 1 : 0,
+          transform: `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(${visible ? 1 : 0.85})`,
         }}
       />
 
@@ -41,8 +52,11 @@ export default function Education() {
             <div
               key={e.school}
               data-reveal
-              onMouseEnter={() => setActive(e.image)}
-              onMouseLeave={() => setActive(null)}
+              onMouseEnter={() => {
+                setSrc(e.image);
+                setVisible(true);
+              }}
+              onMouseLeave={() => setVisible(false)}
               onMouseMove={(ev) => setPos({ x: ev.clientX, y: ev.clientY })}
               className="group relative cursor-none overflow-hidden rounded-2xl border border-foam/10 bg-deep/20 p-9 transition-all duration-500 hover:-translate-y-1 hover:border-tide/40"
             >

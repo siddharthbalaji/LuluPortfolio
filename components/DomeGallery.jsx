@@ -629,6 +629,7 @@ export default function DomeGallery({
     <div
       ref={rootRef}
       className="sphere-root"
+      data-interactive={interactive ? 'true' : 'false'}
       style={{
         ['--segments-x']: segments,
         ['--segments-y']: segments,
@@ -638,7 +639,7 @@ export default function DomeGallery({
         ['--image-filter']: grayscale ? 'grayscale(1)' : 'none'
       }}
     >
-      <main ref={mainRef} className="sphere-main" style={interactive ? undefined : { pointerEvents: 'none' }}>
+      <main ref={mainRef} className="sphere-main">
         <div className="stage">
           <div ref={sphereRef} className="sphere">
             {items.map((it, i) => (

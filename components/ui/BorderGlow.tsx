@@ -4,6 +4,14 @@
 // The original follows the cursor; this version is fully automatic — no hover or
 // pointer interaction. The directional beam rotates continuously around the
 // border via a CSS variable updated in a rAF loop, and honours reduced-motion.
+//
+// PERF: the rotating beam animates conic-gradient masks every frame, which is
+// expensive to re-rasterize (especially with the blend modes + multi-layer
+// box-shadow below). To keep it cheap we (1) only run the rAF loop while the
+// card is actually on screen and the tab is visible, and (2) freeze the beam
+// to a static angle on coarse-pointer / touch devices, where the per-frame
+// mask rasterization is the main cause of jank. The glow still renders fully
+// in both cases — on touch it simply doesn't rotate.
 
 import {
   useEffect,
@@ -93,25 +101,63 @@ export default function BorderGlow({
     const el = ref.current;
     if (!el) return;
 
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Touch / coarse-pointer devices (phones, most tablets) pay a heavy
+    // per-frame cost for the animated conic-gradient masks + blend modes, so
+    // freeze the beam there. The card still shows the full glow — it just
+    // doesn't rotate.
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
 
-    if (reduce || !speed) {
+    if (reduce || coarse || !speed) {
       el.style.setProperty("--bg-angle", "135deg");
       return;
     }
 
     let raf = 0;
     let start: number | null = null;
+    let running = false;
+    let onScreen = false;
+
     const loop = (t: number) => {
       if (start === null) start = t;
       const deg = (((t - start) / (speed * 1000)) * 360) % 360;
       el.style.setProperty("--bg-angle", `${deg}deg`);
       raf = requestAnimationFrame(loop);
     };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
+
+    const startLoop = () => {
+      if (running) return;
+      running = true;
+      start = null; // resume timing cleanly (any phase jump is off-screen anyway)
+      raf = requestAnimationFrame(loop);
+    };
+    const stopLoop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+
+    // Run frames only while the card is on screen AND the tab is visible.
+    const sync = () => {
+      if (onScreen && !document.hidden) startLoop();
+      else stopLoop();
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        sync();
+      },
+      { threshold: 0 }
+    );
+    io.observe(el);
+
+    document.addEventListener("visibilitychange", sync);
+
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+      stopLoop();
+    };
   }, [speed]);
 
   const mesh = buildMeshGradients(colors);

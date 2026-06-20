@@ -163,8 +163,14 @@ export default function Experience({
       let changed = false;
       const next = onRef.current.slice();
       g.dots.forEach((dot, i) => {
-        if (!next[i] && (reducedRef.current || frontY >= dot.y - T.dotLead)) {
-          next[i] = true;
+        // Bidirectional: a node is active iff the draw-front has reached it.
+        // Tracking the front in BOTH directions (rather than latching on
+        // permanently) means each node — and its card halves — fades and
+        // scales back out as the line recedes on scroll-up, staying in sync
+        // with the spine instead of remaining stuck visible.
+        const active = reducedRef.current || frontY >= dot.y - T.dotLead;
+        if (next[i] !== active) {
+          next[i] = active;
           changed = true;
         }
       });

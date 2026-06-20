@@ -112,12 +112,12 @@ export default function Hero() {
       `}</style>
 
       {/* Reflective line-waves — the signature motif */}
-      <div className="absolute inset-0 z-0 opacity-90">
+      <div className="absolute inset-0 z-0 opacity-[0.65]">
         <LineWaves
           color1="#B3CFE5"
           color2="#4A7FA7"
           color3="#F6FAFD"
-          brightness={0.26}
+          brightness={0.18}
           speed={0.3}
           rotation={-45}
           warp={1.0}
@@ -125,7 +125,10 @@ export default function Hero() {
         />
       </div>
       {/* depth gradient so text stays legible over the surface */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-abyss/85 via-abyss/35 to-abyss/95" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-abyss/70 via-abyss/45 to-abyss" />
+      {/* feathered scrim concentrated behind the text block (content is bottom-anchored).
+          Fades to transparent upward, so it reads as depth — not a card/box. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[78%] bg-gradient-to-t from-abyss via-abyss/85 to-transparent" />
       {/* faint giant katakana watermark */}
       <div
         aria-hidden
@@ -135,7 +138,20 @@ export default function Hero() {
       </div>
 
       <div className="relative z-[2] mx-auto flex min-h-[100svh] max-w-[1280px] flex-col justify-end px-6 pb-20 pt-32 sm:px-10 lg:pb-28">
-        {/* Eyebrow */}
+        {/* Frosted-glass division behind the hero copy. Soft radial mask fades
+            the edges so it reads as a panel of depth, not a hard-edged card. */}
+        <div className="relative w-full max-w-[44rem]">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-x-6 -inset-y-7 rounded-[28px] border border-foam/[0.08] bg-abyss/35 backdrop-blur-xl sm:-inset-x-9"
+            style={{
+              WebkitMaskImage:
+                "radial-gradient(135% 130% at 22% 72%, #000 48%, transparent 100%)",
+              maskImage:
+                "radial-gradient(135% 130% at 22% 72%, #000 48%, transparent 100%)",
+            }}
+          />
+          {/* Eyebrow */}
         <motion.div
           custom={0}
           variants={fade}
@@ -169,7 +185,7 @@ export default function Hero() {
           variants={fade}
           initial="hidden"
           animate="show"
-          className="mt-8 max-w-[460px] text-[15px] font-light leading-relaxed text-mist/85 text-halo-soft"
+          className="mt-8 max-w-[460px] text-[15px] font-light leading-relaxed text-mist text-halo-soft"
         >
           {PROFILE.tagline}
         </motion.p>
@@ -193,6 +209,7 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
+        </div>
       </div>
 
       {/* scroll cue */}

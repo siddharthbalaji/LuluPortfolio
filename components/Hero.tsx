@@ -83,6 +83,7 @@ export default function Hero() {
           inset: 0;
           pointer-events: none;
           opacity: 0;
+          text-shadow: none; /* don't inherit the .text-halo glow on glitch layers */
         }
         @media (prefers-reduced-motion: no-preference) {
           .lulu-word.is-glitch::before {
@@ -111,12 +112,12 @@ export default function Hero() {
       `}</style>
 
       {/* Reflective line-waves — the signature motif */}
-      <div className="absolute inset-0 z-0 opacity-90">
+      <div className="absolute inset-0 z-0 opacity-[0.65]">
         <LineWaves
           color1="#B3CFE5"
           color2="#4A7FA7"
           color3="#F6FAFD"
-          brightness={0.26}
+          brightness={0.18}
           speed={0.3}
           rotation={-45}
           warp={1.0}
@@ -124,7 +125,10 @@ export default function Hero() {
         />
       </div>
       {/* depth gradient so text stays legible over the surface */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-abyss/85 via-abyss/35 to-abyss/95" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-abyss/70 via-abyss/45 to-abyss" />
+      {/* feathered scrim concentrated behind the text block (content is bottom-anchored).
+          Fades to transparent upward, so it reads as depth — not a card/box. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[78%] bg-gradient-to-t from-abyss via-abyss/85 to-transparent" />
       {/* faint giant katakana watermark */}
       <div
         aria-hidden
@@ -143,7 +147,7 @@ export default function Hero() {
           className="mb-7 flex items-center gap-3"
         >
           <span className="h-px w-8 bg-tide" />
-          <span className="font-mono text-[11px] uppercase tracking-widest2 text-mist">
+          <span className="font-mono text-[11px] uppercase tracking-widest2 text-mist text-halo-soft">
             {PROFILE.roleLine}
           </span>
         </motion.div>
@@ -154,7 +158,7 @@ export default function Hero() {
           variants={fade}
           initial="hidden"
           animate="show"
-          className="font-display text-[clamp(58px,11vw,150px)] font-light leading-[0.86] tracking-tight text-foam"
+          className="font-display text-[clamp(58px,11vw,150px)] font-light leading-[0.86] tracking-tight text-foam text-halo"
         >
           <span className="block">
             <RotatingWord words={ROTATING} />
@@ -168,7 +172,7 @@ export default function Hero() {
           variants={fade}
           initial="hidden"
           animate="show"
-          className="mt-8 max-w-[460px] text-[15px] font-light leading-relaxed text-mist/85"
+          className="mt-8 max-w-[460px] text-[15px] font-light leading-relaxed text-mist text-halo-soft"
         >
           {PROFILE.tagline}
         </motion.p>
@@ -183,10 +187,10 @@ export default function Hero() {
         >
           {STATS.map((s) => (
             <div key={s.label}>
-              <div className="font-display text-[clamp(30px,4vw,46px)] font-light leading-none text-foam">
+              <div className="font-display text-[clamp(30px,4vw,46px)] font-light leading-none text-foam text-halo">
                 <CountUp to={s.value} suffix={s.suffix} />
               </div>
-              <div className="mt-2 font-mono text-[10px] uppercase tracking-widest text-tide">
+              <div className="mt-2 font-mono text-[10px] uppercase tracking-widest text-tide text-halo-soft">
                 {s.label}
               </div>
             </div>

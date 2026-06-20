@@ -83,6 +83,7 @@ export default function Hero() {
           inset: 0;
           pointer-events: none;
           opacity: 0;
+          text-shadow: none; /* don't inherit the .text-halo glow on glitch layers */
         }
         @media (prefers-reduced-motion: no-preference) {
           .lulu-word.is-glitch::before {
@@ -143,7 +144,7 @@ export default function Hero() {
           className="mb-7 flex items-center gap-3"
         >
           <span className="h-px w-8 bg-tide" />
-          <span className="font-mono text-[11px] uppercase tracking-widest2 text-mist">
+          <span className="font-mono text-[11px] uppercase tracking-widest2 text-mist text-halo-soft">
             {PROFILE.roleLine}
           </span>
         </motion.div>
@@ -154,7 +155,7 @@ export default function Hero() {
           variants={fade}
           initial="hidden"
           animate="show"
-          className="font-display text-[clamp(58px,11vw,150px)] font-light leading-[0.86] tracking-tight text-foam"
+          className="font-display text-[clamp(58px,11vw,150px)] font-light leading-[0.86] tracking-tight text-foam text-halo"
         >
           <span className="block">
             <RotatingWord words={ROTATING} />
@@ -168,7 +169,7 @@ export default function Hero() {
           variants={fade}
           initial="hidden"
           animate="show"
-          className="mt-8 max-w-[460px] text-[15px] font-light leading-relaxed text-mist/85"
+          className="mt-8 max-w-[460px] text-[15px] font-light leading-relaxed text-mist/85 text-halo-soft"
         >
           {PROFILE.tagline}
         </motion.p>
@@ -183,10 +184,10 @@ export default function Hero() {
         >
           {STATS.map((s) => (
             <div key={s.label}>
-              <div className="font-display text-[clamp(30px,4vw,46px)] font-light leading-none text-foam">
+              <div className="font-display text-[clamp(30px,4vw,46px)] font-light leading-none text-foam text-halo">
                 <CountUp to={s.value} suffix={s.suffix} />
               </div>
-              <div className="mt-2 font-mono text-[10px] uppercase tracking-widest text-tide">
+              <div className="mt-2 font-mono text-[10px] uppercase tracking-widest text-tide text-halo-soft">
                 {s.label}
               </div>
             </div>

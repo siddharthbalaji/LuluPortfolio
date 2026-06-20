@@ -138,20 +138,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-[2] mx-auto flex min-h-[100svh] max-w-[1280px] flex-col justify-end px-6 pb-20 pt-32 sm:px-10 lg:pb-28">
-        {/* Frosted-glass division behind the hero copy. Soft radial mask fades
-            the edges so it reads as a panel of depth, not a hard-edged card. */}
-        <div className="relative w-full max-w-[44rem]">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -inset-x-6 -inset-y-7 rounded-[28px] border border-foam/[0.08] bg-abyss/35 backdrop-blur-xl sm:-inset-x-9"
-            style={{
-              WebkitMaskImage:
-                "radial-gradient(135% 130% at 22% 72%, #000 48%, transparent 100%)",
-              maskImage:
-                "radial-gradient(135% 130% at 22% 72%, #000 48%, transparent 100%)",
-            }}
-          />
-          {/* Eyebrow */}
+        {/* Eyebrow */}
         <motion.div
           custom={0}
           variants={fade}
@@ -209,7 +196,6 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
-        </div>
       </div>
 
       {/* scroll cue */}

@@ -92,20 +92,22 @@ body {
     mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
   }
 
-  /* Soft blurred halo that hugs each glyph — improves legibility over the
-     animated background without drawing a card/box. Hugs the text outline. */
+  /* Soft blurred halo + a subtle directional drop shadow — lifts the text off
+     the animated background without drawing a card/box. Hugs the glyph outline. */
   .text-halo {
     text-shadow:
       0 0 1px rgba(10, 25, 49, 0.95),  /* tight edge — crisp contrast guarantee */
-      0 0 12px rgba(10, 25, 49, 0.85), /* the soft "border" */
-      0 0 28px rgba(10, 25, 49, 0.6);  /* outer falloff into the background */
+      0 0 12px rgba(10, 25, 49, 0.85), /* the soft halo */
+      0 0 28px rgba(10, 25, 49, 0.6),  /* outer falloff into the background */
+      0 2px 6px rgba(10, 25, 49, 0.7); /* directional drop shadow for depth */
   }
 
   /* Lighter variant for small/secondary text (e.g. the tide stat labels). */
   .text-halo-soft {
     text-shadow:
       0 0 1px rgba(10, 25, 49, 0.9),
-      0 0 8px rgba(10, 25, 49, 0.7);
+      0 0 8px rgba(10, 25, 49, 0.7),
+      0 1px 3px rgba(10, 25, 49, 0.6); /* directional drop shadow for depth */
   }
 }
 

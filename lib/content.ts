@@ -12,8 +12,9 @@ export const PROFILE = {
     "A product-focused visual designer working across UI/UX, motion, and illustration — fluent in the AI tools reshaping how we design.",
   quote: "I often tell myself that everything you can imagine is real.",
   bio: [
-    "I'm a product-focused visual designer with a background spanning UI/UX, graphic design, illustration, and motion graphics. Strong in animation, storytelling, and interface design, I deliver polished, detail-driven work that balances aesthetics, usability, and innovation.",
-    "I bring a detail-driven approach that balances aesthetics, usability, and innovation — and I'm fluent in the latest AI tools reshaping how we design.",
+    "I love turning messy ideas into experiences that feel simple, intuitive, and nice to look at. I spend an unreasonable amount of time nudging pixels, tweaking animations.",
+    "I’m also deep into AI tools—not because they’ll replace designers, but because they’re excellent at helping me do the boring stuff while I focus on the fun part.",
+    "The goal? Make things that work beautifully, look great, and don't make users question their life choices.",
   ],
   location: "Chennai, India",
   email: "sidofficial7801@gmail.com",

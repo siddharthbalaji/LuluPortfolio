@@ -158,7 +158,7 @@ export const EDUCATION = [
     icon: "ma",
     school: "Coventry University",
     degree: "MA — Illustration & Animation",
-    date: "Sept 2023 — Sept 2024 · Coventry, UK",
+    date: "Sept 2023 — Sept 2024 · UK",
     image:
       "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/CU_Image_mon7dm.png",
   },
@@ -166,32 +166,32 @@ export const EDUCATION = [
     icon: "be",
     school: "Chennai Institute of Technology",
     degree: "BE — Computer Science & Engineering",
-    date: "Jul 2019 — Jul 2023 · Chennai, India",
+    date: "Jul 2019 — Jul 2023 · India",
     image:
       "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/CIT_Image_knhwlu.png",
   },
 ];
 
 export const BRAND = {
-  intro: "LULU — a personal brand built on reflection, duality, and the poetry of Japanese form.",
+  intro: "LULU — a personal brand built on reflection, duality, and the poetry of Japanese form. It is also a nickname/alias that I commonly use.",
   steps: [
     {
       idx: "01",
       kicker: "Origin",
       title: "The Origin Glyph",
-      body: "The Japanese katakana ル (lu) is the phonetic seed of LULU — repeated to visually form ルル, reading 'Lulu'.",
+      body: "The Japanese katakana ル (lu) is the phonetic seed of LULU.",
     },
     {
       idx: "02",
       kicker: "Reflect",
       title: "The 180° Reflection",
-      body: "Rotate ル exactly 180° and place it below the original. Two halves that slot together — like a reflection in still water.",
+      body: "Rotate ル exactly 180° and place it below the original ル. Two halves that slot together — forming my identity.",
     },
     {
       idx: "03",
       kicker: "Mark",
       title: "ルル · LULU",
-      body: "Together they read ルル — the finished mark, drawn directly from my alias 'Lulu'.",
+      body: "Together they read ルル (Lulu) — the finished mark, drawn directly from my alias 'Lulu'.",
     },
   ],
 };

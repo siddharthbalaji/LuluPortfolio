@@ -12,8 +12,9 @@ export const PROFILE = {
     "A product-focused visual designer working across UI/UX, motion, and illustration — fluent in the AI tools reshaping how we design.",
   quote: "I often tell myself that everything you can imagine is real.",
   bio: [
-    "I'm a product-focused visual designer with a background spanning UI/UX, graphic design, illustration, and motion graphics. Strong in animation, storytelling, and interface design, I deliver polished, detail-driven work that balances aesthetics, usability, and innovation.",
-    "I bring a detail-driven approach that balances aesthetics, usability, and innovation — and I'm fluent in the latest AI tools reshaping how we design.",
+    "I love turning messy ideas into experiences that feel simple, intuitive, and nice to look at. I spend an unreasonable amount of time nudging pixels, tweaking animations.",
+    "I’m also deep into AI tools—not because they’ll replace designers, but because they’re excellent at helping me do the boring stuff while I focus on the fun part.",
+    "The goal? Make things that work beautifully, look great, and don't make users question their life choices.",
   ],
   location: "Chennai, India",
   email: "sidofficial7801@gmail.com",
@@ -34,8 +35,8 @@ export const XCARD = {
     "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/v1781677219/X_Profile_luxp8e.png",
   verifiedBadge:
     "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/v1781677218/Verified_tiys8z.png",
-  time: "9:24 AM · Mar 4, 2026",
-  stats: { replies: 32, reposts: 124, likes: 940 },
+  time: "10:24 AM · Mar 4, 2026",
+  stats: { replies: 160, reposts: 620, likes: 4700 },
 };
 
 export const ROLES = [
@@ -53,9 +54,9 @@ export const STATS = [
 ];
 
 export const MARQUEE = [
-  "UI / UX Design", "Motion Graphics", "After Effects", "Illustration",
-  "Figma", "Blender", "AI-Augmented Design", "Storyboarding",
-  "Framer", "Coventry University MA", "Clip Studio Paint", "MidJourney",
+  "Motion Design", "UI/UX Design", "Visual Design", "Product Design", 
+  "Brand Design", "Animation", "Creative Direction", "Visual Storytelling", 
+  "Design Systems", "User Experience", "User Interface", "Creative Strategy",
 ];
 
 export const TRAITS = [
@@ -157,7 +158,7 @@ export const EDUCATION = [
     icon: "ma",
     school: "Coventry University",
     degree: "MA — Illustration & Animation",
-    date: "Sept 2023 — Sept 2024 · Coventry, UK",
+    date: "Sept 2023 — Sept 2024 · UK",
     image:
       "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/CU_Image_mon7dm.png",
   },
@@ -165,32 +166,32 @@ export const EDUCATION = [
     icon: "be",
     school: "Chennai Institute of Technology",
     degree: "BE — Computer Science & Engineering",
-    date: "Jul 2019 — Jul 2023 · Chennai, India",
+    date: "Jul 2019 — Jul 2023 · India",
     image:
       "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/CIT_Image_knhwlu.png",
   },
 ];
 
 export const BRAND = {
-  intro: "LULU — a personal brand built on reflection, duality, and the poetry of Japanese form.",
+  intro: "LULU — a personal brand built on reflection, duality, and the poetry of Japanese form. It is also a nickname/alias that I commonly use.",
   steps: [
     {
       idx: "01",
       kicker: "Origin",
       title: "The Origin Glyph",
-      body: "The Japanese katakana ル (lu) is the phonetic seed of LULU — repeated to visually form ルル, reading 'Lulu'.",
+      body: "The Japanese katakana ル (lu) is the phonetic seed of LULU.",
     },
     {
       idx: "02",
       kicker: "Reflect",
       title: "The 180° Reflection",
-      body: "Rotate ル exactly 180° and place it below the original. Two halves that slot together — like a reflection in still water.",
+      body: "Rotate ル exactly 180° and place it below the original ル. Two halves that slot together — forming my identity.",
     },
     {
       idx: "03",
       kicker: "Mark",
       title: "ルル · LULU",
-      body: "Together they read ルル — the finished mark, drawn directly from my alias 'Lulu'.",
+      body: "Together they read ルル (Lulu) — the finished mark, drawn directly from my alias 'Lulu'.",
     },
   ],
 };

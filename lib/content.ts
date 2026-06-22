@@ -35,8 +35,8 @@ export const XCARD = {
     "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/v1781677219/X_Profile_luxp8e.png",
   verifiedBadge:
     "https://res.cloudinary.com/dxqucwyyo/image/upload/q_auto/f_auto/v1781677218/Verified_tiys8z.png",
-  time: "9:24 AM · Mar 4, 2026",
-  stats: { replies: 32, reposts: 124, likes: 940 },
+  time: "10:24 AM · Mar 4, 2026",
+  stats: { replies: 160, reposts: 620, likes: 4700 },
 };
 
 export const ROLES = [
@@ -54,9 +54,9 @@ export const STATS = [
 ];
 
 export const MARQUEE = [
-  "UI / UX Design", "Motion Graphics", "After Effects", "Illustration",
-  "Figma", "Blender", "AI-Augmented Design", "Storyboarding",
-  "Framer", "Coventry University MA", "Clip Studio Paint", "MidJourney",
+  "Motion Design", "UI/UX Design", "Visual Design", "Product Design", 
+  "Brand Design", "Animation", "Creative Direction", "Visual Storytelling", 
+  "Design Systems", "User Experience", "User Interface", "Creative Strategy",
 ];
 
 export const TRAITS = [

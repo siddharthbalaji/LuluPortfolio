@@ -5,15 +5,15 @@ export const PROFILE = {
   name: "Siddharth Balaji",
   alias: "Lulu",
   aliasGlyph: "ルル",
-  roleLine: "Product · Visual · Motion",
+  roleLine: "Siddharth Balaji",
   titleLead: "Product",
   titleTail: "Designer.",
   tagline:
-    "A product-focused visual designer working across UI/UX, motion, and illustration — fluent in the AI tools reshaping how we design.",
+    "A product-focused visual designer working across UI/UX, motion, and illustration...fluent in the AI tools reshaping how we design.",
   quote: "I often tell myself that everything you can imagine is real.",
   bio: [
     "I love turning messy ideas into experiences that feel simple, intuitive, and nice to look at. I spend an unreasonable amount of time nudging pixels, tweaking animations.",
-    "I’m also deep into AI tools—not because they’ll replace designers, but because they’re excellent at helping me do the boring stuff while I focus on the fun part.",
+    "I’m also deep into AI tools.....not because they’ll replace designers, but because they’re excellent at helping me do the boring stuff while I focus on the fun part.",
     "The goal? Make things that work beautifully, look great, and don't make users question their life choices.",
   ],
   location: "Chennai, India",
@@ -70,7 +70,7 @@ export const TRAITS = [
   },
   {
     name: "Storyteller at Heart",
-    desc: "From storyboards to social video ads, I design narratives — not just screens.",
+    desc: "From storyboards to social video ads, I design narratives...not just screens.",
   },
   {
     name: "AI-Augmented Creator",
@@ -94,7 +94,7 @@ export const EXPERIENCE: Job[] = [
     type: "Internship",
     role: "Motion Graphic & UI/UX Designer",
     bullets: [
-      "Created and developed motion design concepts — storyboards and animated sequences for an original series — establishing a consistent visual style and enhancing overall user engagement.",
+      "Created and developed motion design concepts, storyboards and animated sequences for an original series...establishing a consistent visual style and enhancing overall user engagement.",
       "Worked with cross-functional teams on web projects, contributing to UI/UX design, user flows, spatial structuring, and the integration of interactive digital elements.",
     ],
     tags: ["Motion Graphics", "UI/UX Design", "Interaction Design", "Digital Experience"],

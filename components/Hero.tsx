@@ -146,7 +146,7 @@ export default function Hero() {
           animate="show"
           className="mb-7 flex items-center gap-3"
         >
-          <span className="h-px w-8 bg-tide" />
+          {/* <span className="h-px w-8 bg-tide" /> */}
           <span className="font-mono text-[11px] uppercase tracking-widest2 text-mist text-halo-soft">
             {PROFILE.roleLine}
           </span>

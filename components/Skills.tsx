@@ -80,10 +80,10 @@ type Card = {
 const CARDS: Card[] = [
   {
     appIcon: ICON.figma,
-    eyebrow: "Lulu · Portfolio",
+    eyebrow: "Lulu | Portfolio",
     title: "Design & UI/UX",
     time: "now",
-    body: "Interface, identity & product design — Figma, Illustrator, Framer & Tailwind.",
+    body: "Interface, identity & product design - Figma, Illustrator, Framer & Tailwind.",
     minis: [
       { src: ICON.figma, alt: "Figma" },
       { src: ICON.illustrator, alt: "Illustrator" },
@@ -93,10 +93,10 @@ const CARDS: Card[] = [
   },
   {
     appIcon: ICON.afterEffects,
-    eyebrow: "Lulu · Studio",
+    eyebrow: "Lulu | Studio",
     title: "Motion & 3D",
     time: "1m ago",
-    body: "Animation, edit & real-time — After Effects, Premiere, Blender, Unreal & Unity.",
+    body: "Animation, edit & real-time - After Effects, Premiere, Blender, Unreal & Unity.",
     minis: [
       { src: ICON.afterEffects, alt: "After Effects" },
       { src: ICON.premiere, alt: "Premiere" },
@@ -107,10 +107,10 @@ const CARDS: Card[] = [
   },
   {
     appIcon: ICON.claude,
-    eyebrow: "Lulu · Lab",
+    eyebrow: "Lulu | Lab",
     title: "AI & Emerging Tools",
     time: "2m ago",
-    body: "Generative & assisted workflows — Claude, ChatGPT & Gemini.",
+    body: "Generative & assisted workflows - Claude, ChatGPT & Gemini.",
     minis: [
       { src: ICON.claude, alt: "Claude" },
       { src: ICON.chatgpt, alt: "ChatGPT" },
@@ -217,7 +217,7 @@ export default function Skills() {
               </span>
               <div className="st-url">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm3 8H9V6a3 3 0 0 1 6 0z" /></svg>
-                lulusidd.com
+                lulusidd.com/skills
                 <span className="st-reload">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7" /><path d="M21 4v5h-5" /></svg>
                 </span>
@@ -238,7 +238,7 @@ export default function Skills() {
           {/* tab strip */}
           <div className="st-tabstrip">
             <div className="st-tab">
-              <span className="st-fav">ル</span> Skills &amp; Tools — Lulu
+              <span className="st-fav">ル</span> Portfolio
             </div>
             <div className="st-tab st-ghost">＋</div>
           </div>

@@ -74,7 +74,7 @@ function RotatingWord({ words, interval = 2200 }: { words: string[]; interval?: 
 export default function Hero() {
   return (
     <section id="top" className="relative min-h-[100svh] overflow-hidden bg-abyss">
-      {/* glitch keyframes — tinted to the water palette, gated behind reduced-motion */}
+      {/* glitch keyframes - tinted to the water palette, gated behind reduced-motion */}
       <style>{`
         .lulu-word::before,
         .lulu-word::after {
@@ -152,7 +152,7 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* Headline — rotating discipline above the fixed role */}
+        {/* Headline - rotating discipline above the fixed role */}
         <motion.h1
           custom={1}
           variants={fade}

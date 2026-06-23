@@ -105,7 +105,7 @@ export default function Experience({
 
   // Main lifecycle: measure geometry, drive the draw-front from scroll
   // with a rAF-throttled listener, and recompute on resize. No
-  // ScrollTrigger — geometry is read live so the lazy Work grid above
+  // ScrollTrigger - geometry is read live so the lazy Work grid above
   // can grow without leaving us pointing at stale pixel positions.
   useEffect(() => {
     const el = containerRef.current;

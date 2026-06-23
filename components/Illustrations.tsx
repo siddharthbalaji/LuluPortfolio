@@ -6,7 +6,7 @@ import { thumb } from "@/lib/cloudinary";
 import { Eyebrow, Heading } from "@/components/ui/Section";
 
 /**
- * Selected illustration — wrapped onto an interactive 3D dome.
+ * Selected illustration - wrapped onto an interactive 3D dome.
  * Replaces the old auto-playing CSS carousel with React Bits' DomeGallery.
  * The portfolio's ILLUSTRATIONS media is mapped into the { src, alt } shape
  * the gallery expects; clicking a tile enlarges it inside the dome (the
@@ -32,8 +32,7 @@ export default function Illustrations() {
             <em className="italic text-tide">illustration.</em>
           </Heading>
           <p className="max-w-sm text-[15px] font-light leading-relaxed text-mist/70">
-            Character studies, brand pieces and experiments — wrapped onto a
-            dome that turns on its own.
+            Character studies, brand pieces and illustrations.
           </p>
         </div>
 

@@ -382,4 +382,16 @@ const CSS = `
 @media (prefers-reduced-motion:reduce){
   .st-bobA,.st-bobB,.st-bobC{animation:none}
 }
+
+/* ── Mobile: enlarge the three notification cards for readability ──
+   The whole mockup is uniformly scaled DOWN to fit phone widths (see the JS
+   "fit" routine above), which also shrinks these cards until the text gets too
+   small to read. Here we counter-scale just the card cluster back up, around
+   its own centre, so only the cards grow — the floating icons keep their size.
+   The canvas is given extra height so the taller stack is never clipped.
+   Tweak the scale() value below: 1.5 = 1.5× bigger, 2 = 2× bigger. */
+@media (max-width:640px){
+  .st-canvas{height:900px}
+  .st-cluster{transform:translate(-50%,-50%) scale(1.5)}
+}
 `;

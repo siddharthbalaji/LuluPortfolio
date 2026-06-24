@@ -64,7 +64,7 @@ export default function Brand() {
               <li
                 key={s.idx}
                 data-reveal
-                className="group grid grid-cols-[auto_1fr] gap-5 border-t border-foam/10 py-7 last:border-b"
+                className="group grid grid-cols-[64px_1fr] gap-5 border-t border-foam/10 py-7 last:border-b"
               >
                 <div className="flex flex-col items-start gap-1">
                   <span className="font-mono text-[11px] tracking-widest text-tide">

@@ -57,29 +57,29 @@ export default function Contact() {
           Open to freelance, full-time roles, and exciting collaborations. I&apos;d
           love to hear what you&apos;re building.
         </motion.p>
+      </div>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-4">
+      <div className="relative mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-3">
           {CARDS.map((c) => (
             <a
               key={c.sub}
               href={c.href}
               target={c.sub === "LinkedIn" ? "_blank" : undefined}
               rel="noreferrer"
-              className="group flex items-center gap-3.5 rounded-2xl border border-foam/12 bg-deep/25 px-6 py-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-tide/50 hover:bg-deep/40"
+              className="group flex w-full min-w-0 items-center gap-3.5 rounded-2xl border border-foam/12 bg-deep/25 px-5 py-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-tide/50 hover:bg-deep/40"
             >
-              <span className="grid h-10 w-10 place-items-center rounded-xl border border-foam/12 bg-abyss/50 font-mono text-sm text-tide">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-foam/12 bg-abyss/50 font-mono text-sm text-tide">
                 {c.glyph}
               </span>
-              <span className="leading-tight">
+              <span className="min-w-0 leading-tight">
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-mist/45">
                   {c.sub}
                 </span>
-                <span className="block text-sm text-foam">{c.label}</span>
+                <span className="block break-words text-sm text-foam">{c.label}</span>
               </span>
             </a>
           ))}
         </div>
-      </div>
     </section>
   );
 }

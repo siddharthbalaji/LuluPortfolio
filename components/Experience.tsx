@@ -105,7 +105,7 @@ export default function Experience({
 
   // Main lifecycle: measure geometry, drive the draw-front from scroll
   // with a rAF-throttled listener, and recompute on resize. No
-  // ScrollTrigger - geometry is read live so the lazy Work grid above
+  // ScrollTrigger — geometry is read live so the lazy Work grid above
   // can grow without leaving us pointing at stale pixel positions.
   useEffect(() => {
     const el = containerRef.current;
@@ -352,12 +352,9 @@ export default function Experience({
               const content = (
                 <div
                   key="content"
-                  data-on={isOn ? "true" : "false"}
-                  style={{ transitionTimingFunction: SPRING }}
                   className={cx(
                     "order-2 flex flex-col",
-                    metaOnLeft ? "md:order-3" : "md:order-1",
-                    halfMotion(contentRight)
+                    metaOnLeft ? "md:order-3" : "md:order-1"
                   )}
                 >
                   <ul
@@ -369,8 +366,17 @@ export default function Experience({
                     {job.bullets.map((b, bi) => (
                       <li
                         key={bi}
+                        data-on={isOn ? "true" : "false"}
+                        style={{
+                          transitionTimingFunction: SPRING,
+                          transitionDelay: `${bi * 0.12}s`,
+                        }}
                         className={cx(
                           "flex w-fit max-w-[44ch] gap-2 text-[15px] font-light leading-relaxed text-mist/70",
+                          // each line reveals on its own, one after another
+                          "translate-y-3 opacity-0 transition duration-500 will-change-transform",
+                          "data-[on=true]:translate-y-0 data-[on=true]:opacity-100",
+                          "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
                           contentRight
                             ? "text-left md:flex-row-reverse md:text-right"
                             : "text-left"
@@ -382,8 +388,17 @@ export default function Experience({
                     ))}
                   </ul>
                   <div
+                    data-on={isOn ? "true" : "false"}
+                    style={{
+                      transitionTimingFunction: SPRING,
+                      transitionDelay: `${job.bullets.length * 0.12}s`,
+                    }}
                     className={cx(
                       "mt-5 flex flex-wrap gap-2",
+                      // the tag row follows the last line in the stagger
+                      "translate-y-3 opacity-0 transition duration-500 will-change-transform",
+                      "data-[on=true]:translate-y-0 data-[on=true]:opacity-100",
+                      "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
                       contentRight ? "justify-start md:justify-end" : "justify-start"
                     )}
                   >

@@ -25,7 +25,6 @@ const fade = {
 
 function RotatingWord({ words, interval = 2200 }: { words: string[]; interval?: number }) {
   const [i, setI] = useState(0);
-  const [glitch, setGlitch] = useState(false);
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
@@ -38,16 +37,10 @@ function RotatingWord({ words, interval = 2200 }: { words: string[]; interval?: 
 
   useEffect(() => {
     if (reduced) return; // respect reduced motion — hold on the first word
-    let settle: ReturnType<typeof setTimeout>;
     const id = setInterval(() => {
       setI((p) => (p + 1) % words.length);
-      setGlitch(true);
-      settle = setTimeout(() => setGlitch(false), 420);
     }, interval);
-    return () => {
-      clearInterval(id);
-      clearTimeout(settle);
-    };
+    return () => clearInterval(id);
   }, [reduced, words.length, interval]);
 
   const word = words[i];
@@ -57,12 +50,11 @@ function RotatingWord({ words, interval = 2200 }: { words: string[]; interval?: 
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={word}
-          data-text={word}
           initial={{ opacity: 0, y: "0.5em", filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           exit={{ opacity: 0, y: "-0.5em", filter: "blur(8px)" }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className={`lulu-word inline-block text-foam ${glitch ? "is-glitch" : ""}`}
+          className="inline-block text-foam"
         >
           {word}
         </motion.span>
@@ -74,43 +66,6 @@ function RotatingWord({ words, interval = 2200 }: { words: string[]; interval?: 
 export default function Hero() {
   return (
     <section id="top" className="relative min-h-[100svh] overflow-hidden bg-abyss">
-      {/* glitch keyframes - tinted to the water palette, gated behind reduced-motion */}
-      <style>{`
-        .lulu-word::before,
-        .lulu-word::after {
-          content: attr(data-text);
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          opacity: 0;
-          text-shadow: none; /* don't inherit the .text-halo glow on glitch layers */
-        }
-        @media (prefers-reduced-motion: no-preference) {
-          .lulu-word.is-glitch::before {
-            color: #4A7FA7;
-            animation: luluGlitchA 0.42s steps(2, end);
-          }
-          .lulu-word.is-glitch::after {
-            color: #B3CFE5;
-            animation: luluGlitchB 0.42s steps(2, end);
-          }
-        }
-        @keyframes luluGlitchA {
-          0%   { opacity: 0;   transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
-          25%  { opacity: .65; transform: translate(-2px, 1px); clip-path: inset(0 0 64% 0); }
-          50%  { opacity: .45; transform: translate(2px, -1px); clip-path: inset(56% 0 0 0); }
-          75%  { opacity: .55; transform: translate(-1px, 0);   clip-path: inset(28% 0 42% 0); }
-          100% { opacity: 0;   transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
-        }
-        @keyframes luluGlitchB {
-          0%   { opacity: 0;   transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
-          25%  { opacity: .5;  transform: translate(2px, -1px); clip-path: inset(52% 0 0 0); }
-          50%  { opacity: .6;  transform: translate(-2px, 1px); clip-path: inset(0 0 58% 0); }
-          75%  { opacity: .4;  transform: translate(1px, 0);    clip-path: inset(40% 0 26% 0); }
-          100% { opacity: 0;   transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
-        }
-      `}</style>
-
       {/* Reflective line-waves — the signature motif */}
       <div className="absolute inset-0 z-0 opacity-[0.65]">
         <LineWaves
@@ -137,7 +92,13 @@ export default function Hero() {
         ル
       </div>
 
-      <div className="relative z-[2] mx-auto flex min-h-[100svh] max-w-[1280px] flex-col justify-end px-6 pb-20 pt-32 sm:px-10 lg:pb-28">
+      <div className="relative z-[2] mx-auto flex min-h-[100svh] max-w-[1280px] flex-col px-6 pb-20 pt-24 sm:px-10 lg:pb-28">
+        {/* Flexible top spacer: lets the hero content settle toward the lower
+            half on normal screens, but is capped so very tall viewports — e.g.
+            requesting the desktop site on a phone — can't open a huge gap
+            between the top dock and the hero text. */}
+        <div aria-hidden className="max-h-[160px] flex-1" />
+
         {/* Eyebrow */}
         <motion.div
           custom={0}
@@ -146,13 +107,13 @@ export default function Hero() {
           animate="show"
           className="mb-7 flex items-center gap-3"
         >
-          {/* <span className="h-px w-8 bg-tide" /> */}
+          <span className="h-px w-8 bg-tide" />
           <span className="font-mono text-[11px] uppercase tracking-widest2 text-mist text-halo-soft">
             {PROFILE.roleLine}
           </span>
         </motion.div>
 
-        {/* Headline - rotating discipline above the fixed role */}
+        {/* Headline — rotating discipline above the fixed role */}
         <motion.h1
           custom={1}
           variants={fade}

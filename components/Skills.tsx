@@ -83,7 +83,7 @@ const CARDS: Card[] = [
     eyebrow: "Lulu · Portfolio",
     title: "Design & UI/UX",
     time: "now",
-    body: "Interface, identity & product design — Figma, Illustrator, Framer & Tailwind.",
+    body: "Interface, identity & product design: Figma, Illustrator, Framer & Tailwind.",
     minis: [
       { src: ICON.figma, alt: "Figma" },
       { src: ICON.illustrator, alt: "Illustrator" },
@@ -96,7 +96,7 @@ const CARDS: Card[] = [
     eyebrow: "Lulu · Studio",
     title: "Motion & 3D",
     time: "1m ago",
-    body: "Animation, edit & real-time — After Effects, Premiere, Blender, Unreal & Unity.",
+    body: "Animation, edit & real-time: After Effects, Premiere, Blender, Unreal & Unity.",
     minis: [
       { src: ICON.afterEffects, alt: "After Effects" },
       { src: ICON.premiere, alt: "Premiere" },
@@ -110,7 +110,7 @@ const CARDS: Card[] = [
     eyebrow: "Lulu · Lab",
     title: "AI & Emerging Tools",
     time: "2m ago",
-    body: "Generative & assisted workflows — Claude, ChatGPT & Gemini.",
+    body: "Generative & assisted workflows: Claude, ChatGPT & Gemini.",
     minis: [
       { src: ICON.claude, alt: "Claude" },
       { src: ICON.chatgpt, alt: "ChatGPT" },
@@ -238,7 +238,7 @@ export default function Skills() {
           {/* tab strip */}
           <div className="st-tabstrip">
             <div className="st-tab">
-              <span className="st-fav">ル</span> Skills &amp; Tools — Lulu
+              <span className="st-fav">ル</span> Skills &amp; Tools · Lulu
             </div>
             <div className="st-tab st-ghost">＋</div>
           </div>

@@ -6,7 +6,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://siddharthbalaji.vercel.app"),
-  title: `${PROFILE.name} — Product · Visual · Motion Designer`,
+  title: `${PROFILE.name}, Product · Visual · Motion Designer`,
   description: PROFILE.tagline,
   keywords: [
     "Siddharth Balaji", "Lulu", "product designer", "UI/UX",
@@ -14,14 +14,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: PROFILE.name }],
   openGraph: {
-    title: `${PROFILE.name} — Designer`,
+    title: `${PROFILE.name}, Designer`,
     description: PROFILE.tagline,
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${PROFILE.name} — Designer`,
+    title: `${PROFILE.name}, Designer`,
     description: PROFILE.tagline,
   },
 };

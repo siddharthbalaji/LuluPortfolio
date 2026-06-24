@@ -16,31 +16,6 @@ function IconX({ className = "" }: IconProps) {
   );
 }
 
-function IconMail({ className = "" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="2" y="4" width="20" height="16" rx="2" />
-      <path d="m22 7-10 5L2 7" />
-    </svg>
-  );
-}
-
-function IconPhone({ className = "" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
-    </svg>
-  );
-}
-
-function IconLinkedIn({ className = "" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
-      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
-    </svg>
-  );
-}
-
 function IconReply({ className = "" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -131,30 +106,15 @@ export default function About() {
                 </p>
               ))}
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                <a
-                  href={`mailto:${PROFILE.email}`}
-                  className="flex items-center gap-2 rounded-full border border-foam/12 bg-abyss/40 px-3 py-1.5 text-[12.5px] text-mist/85 transition-colors hover:text-foam"
-                >
-                  <IconMail className="h-3.5 w-3.5 text-tide" />
-                  {PROFILE.email}
-                </a>
-                <a
-                  href={`tel:${PROFILE.phoneHref}`}
-                  className="flex items-center gap-2 rounded-full border border-foam/12 bg-abyss/40 px-3 py-1.5 text-[12.5px] text-mist/85 transition-colors hover:text-foam"
-                >
-                  <IconPhone className="h-3.5 w-3.5 text-tide" />
-                  {PROFILE.phone}
-                </a>
-                <a
-                  href={PROFILE.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 rounded-full border border-foam/12 bg-abyss/40 px-3 py-1.5 text-[12.5px] text-mist/85 transition-colors hover:text-foam"
-                >
-                  <IconLinkedIn className="h-3.5 w-3.5 text-tide" />
-                  {PROFILE.linkedinLabel}
-                </a>
+              <div className="mt-4 flex flex-wrap gap-x-2.5 gap-y-1 text-[14.5px] font-light leading-relaxed text-tide">
+                {XCARD.hashtags.map((h) => (
+                  <span
+                    key={h}
+                    className="cursor-pointer transition-colors hover:text-mist hover:underline"
+                  >
+                    #{h}
+                  </span>
+                ))}
               </div>
 
               <div className="mt-5 flex items-center gap-2 border-t border-foam/10 pt-4 font-mono text-[11.5px] text-mist/50">
@@ -189,10 +149,7 @@ export default function About() {
                   className="animate-floaty rounded-xl border border-foam/10 bg-deep p-4 shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
                   style={{ animationDelay: `${i * 1.5}s` }}
                 >
-                  <span className="font-mono text-[11px] tracking-widest text-tide">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-1.5 font-display text-lg font-medium text-foam">
+                  <h3 className="font-display text-lg font-medium text-foam">
                     {t.name}
                   </h3>
                   <p className="mt-1.5 text-[13px] font-light leading-relaxed text-mist/65">

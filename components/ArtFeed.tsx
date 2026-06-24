@@ -92,7 +92,7 @@ export default function ArtFeed() {
           data-reveal
           className="mt-5 max-w-md text-[15px] font-light leading-relaxed text-mist/70"
         >
-          Personal illustration — characters, studies, and experiments —
+          Personal illustration: characters, studies, and experiments,
           scrolling by the way they live online.
         </p>
 
@@ -320,7 +320,7 @@ export default function ArtFeed() {
             </div>
 
             <p className="mt-5 max-w-sm text-[13px] font-light leading-relaxed text-mist/55">
-              The strip glides on its own — frames ease past the edges and fade
+              The strip glides on its own. Frames ease past the edges and fade
               as they go. Tap any frame to pin it to the post above.
             </p>
           </div>

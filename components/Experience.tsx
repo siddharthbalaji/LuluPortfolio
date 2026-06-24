@@ -352,12 +352,9 @@ export default function Experience({
               const content = (
                 <div
                   key="content"
-                  data-on={isOn ? "true" : "false"}
-                  style={{ transitionTimingFunction: SPRING }}
                   className={cx(
                     "order-2 flex flex-col",
-                    metaOnLeft ? "md:order-3" : "md:order-1",
-                    halfMotion(contentRight)
+                    metaOnLeft ? "md:order-3" : "md:order-1"
                   )}
                 >
                   <ul
@@ -369,21 +366,39 @@ export default function Experience({
                     {job.bullets.map((b, bi) => (
                       <li
                         key={bi}
+                        data-on={isOn ? "true" : "false"}
+                        style={{
+                          transitionTimingFunction: SPRING,
+                          transitionDelay: `${bi * 0.12}s`,
+                        }}
                         className={cx(
                           "flex w-fit max-w-[44ch] gap-2 text-[15px] font-light leading-relaxed text-mist/70",
+                          // each line reveals on its own, one after another
+                          "translate-y-3 opacity-0 transition duration-500 will-change-transform",
+                          "data-[on=true]:translate-y-0 data-[on=true]:opacity-100",
+                          "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
                           contentRight
                             ? "text-left md:flex-row-reverse md:text-right"
                             : "text-left"
                         )}
                       >
-                        <span className="mt-[2px] shrink-0 text-tide">—</span>
+                        <span aria-hidden className="mt-[0.7em] h-px w-2.5 shrink-0 bg-tide" />
                         <span>{b}</span>
                       </li>
                     ))}
                   </ul>
                   <div
+                    data-on={isOn ? "true" : "false"}
+                    style={{
+                      transitionTimingFunction: SPRING,
+                      transitionDelay: `${job.bullets.length * 0.12}s`,
+                    }}
                     className={cx(
                       "mt-5 flex flex-wrap gap-2",
+                      // the tag row follows the last line in the stagger
+                      "translate-y-3 opacity-0 transition duration-500 will-change-transform",
+                      "data-[on=true]:translate-y-0 data-[on=true]:opacity-100",
+                      "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
                       contentRight ? "justify-start md:justify-end" : "justify-start"
                     )}
                   >

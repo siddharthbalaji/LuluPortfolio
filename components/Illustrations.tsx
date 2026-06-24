@@ -32,7 +32,7 @@ export default function Illustrations() {
             <em className="italic text-tide">illustration.</em>
           </Heading>
           <p className="max-w-sm text-[15px] font-light leading-relaxed text-mist/70">
-            Character studies, brand pieces and experiments — wrapped onto a
+            Character studies, brand pieces and experiments, wrapped onto a
             dome that turns on its own.
           </p>
         </div>

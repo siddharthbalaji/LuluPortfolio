@@ -65,7 +65,11 @@ function RotatingWord({ words, interval = 2200 }: { words: string[]; interval?: 
 
 export default function Hero() {
   return (
-    <section id="top" className="relative min-h-[100svh] overflow-hidden bg-abyss">
+    <section
+      id="top"
+      className="relative overflow-hidden bg-abyss"
+      style={{ minHeight: "min(100svh, 1000px)" }}
+    >
       {/* Reflective line-waves — the signature motif */}
       <div className="absolute inset-0 z-0 opacity-[0.65]">
         <LineWaves
@@ -92,13 +96,10 @@ export default function Hero() {
         ル
       </div>
 
-      <div className="relative z-[2] mx-auto flex min-h-[100svh] max-w-[1280px] flex-col px-6 pb-20 pt-24 sm:px-10 lg:pb-28">
-        {/* Flexible top spacer: lets the hero content settle toward the lower
-            half on normal screens, but is capped so very tall viewports — e.g.
-            requesting the desktop site on a phone — can't open a huge gap
-            between the top dock and the hero text. */}
-        <div aria-hidden className="max-h-[160px] flex-1" />
-
+      <div
+        className="relative z-[2] mx-auto flex max-w-[1280px] flex-col justify-center px-6 pb-20 pt-24 sm:px-10 lg:pb-28"
+        style={{ minHeight: "min(100svh, 1000px)" }}
+      >
         {/* Eyebrow */}
         <motion.div
           custom={0}

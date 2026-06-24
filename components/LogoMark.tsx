@@ -15,7 +15,7 @@ const SRC: Record<Variant, string> = {
 export default function LogoMark({
   variant = "white",
   className = "",
-  alt = "LULU - Siddharth Balaji monogram",
+  alt = "LULU · Siddharth Balaji monogram",
 }: {
   variant?: Variant;
   className?: string;

@@ -72,7 +72,7 @@ export default function Work() {
             <em className="italic text-tide">surfaced.</em>
           </Heading>
           <p className="max-w-sm text-[15px] font-light leading-relaxed text-mist/70" data-reveal>
-            Over a hundred posters, a wall of illustration, and motion experiments —
+            Over a hundred posters, a wall of illustration, and motion experiments,
             a working record of how I think across brand, type, and frame.
           </p>
         </div>

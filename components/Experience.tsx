@@ -382,7 +382,7 @@ export default function Experience({
                             : "text-left"
                         )}
                       >
-                        <span className="mt-[2px] shrink-0 text-tide">—</span>
+                        <span aria-hidden className="mt-[0.7em] h-px w-2.5 shrink-0 bg-tide" />
                         <span>{b}</span>
                       </li>
                     ))}

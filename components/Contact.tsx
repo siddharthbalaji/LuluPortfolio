@@ -4,9 +4,27 @@ import { motion } from "framer-motion";
 import { PROFILE } from "@/lib/content";
 
 const CARDS = [
-  { sub: "Email", label: PROFILE.email, href: `mailto:${PROFILE.email}`, glyph: "✉" },
-  { sub: "Phone", label: PROFILE.phone, href: `tel:${PROFILE.phoneHref}`, glyph: "☏" },
-  { sub: "LinkedIn", label: PROFILE.linkedinLabel, href: PROFILE.linkedin, glyph: "in" },
+  {
+    sub: "Email",
+    label: PROFILE.email,
+    href: `mailto:${PROFILE.email}`,
+    icon: "https://res.cloudinary.com/dxqucwyyo/image/upload/email-icon_fnstw6.svg",
+    color: "#EA4335",
+  },
+  {
+    sub: "Phone",
+    label: PROFILE.phone,
+    href: `tel:${PROFILE.phoneHref}`,
+    icon: "https://res.cloudinary.com/dxqucwyyo/image/upload/phone-line-icon_wpiela.svg",
+    color: "#34A853",
+  },
+  {
+    sub: "LinkedIn",
+    label: PROFILE.name,
+    href: PROFILE.linkedin,
+    icon: "https://res.cloudinary.com/dxqucwyyo/image/upload/linkedin-square-icon_sbdj8v.svg",
+    color: "#0A66C2",
+  },
 ];
 
 export default function Contact() {
@@ -68,8 +86,25 @@ export default function Contact() {
               rel="noreferrer"
               className="group flex w-full min-w-0 items-center gap-3.5 rounded-2xl border border-foam/12 bg-deep/25 px-5 py-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-tide/50 hover:bg-deep/40"
             >
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-foam/12 bg-abyss/50 font-mono text-sm text-tide">
-                {c.glyph}
+              <span
+                className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border"
+                style={{ backgroundColor: `${c.color}14`, borderColor: `${c.color}55` }}
+              >
+                <span
+                  aria-hidden
+                  className="h-6 w-6"
+                  style={{
+                    backgroundColor: c.color,
+                    WebkitMaskImage: `url("${c.icon}")`,
+                    maskImage: `url("${c.icon}")`,
+                    WebkitMaskRepeat: "no-repeat",
+                    maskRepeat: "no-repeat",
+                    WebkitMaskPosition: "center",
+                    maskPosition: "center",
+                    WebkitMaskSize: "contain",
+                    maskSize: "contain",
+                  }}
+                />
               </span>
               <span className="min-w-0 leading-tight">
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-mist/45">

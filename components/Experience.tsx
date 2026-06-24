@@ -97,6 +97,9 @@ export default function Experience({
   const rectRef = useRef<SVGRectElement>(null);
   const geoRef = useRef<Geo | null>(null);
   const reducedRef = useRef(false);
+  // Container-relative centre Y of every content line ([data-reveal-line]),
+  // so each can be revealed exactly as the spine's draw-front passes it.
+  const lineYsRef = useRef<{ el: HTMLElement; y: number }[]>([]);
 
   const [geo, setGeo] = useState<Geo | null>(null);
   const [on, setOn] = useState<boolean[]>(() => EXPERIENCE.map(() => false));
@@ -137,6 +140,18 @@ export default function Experience({
 
       const g: Geo = { w, h, dots, path: buildPath(dots, amp, topY, botY) };
       geoRef.current = g;
+
+      // Capture each content line's centre Y in container space. Measured here
+      // (and re-measured on resize) so the per-line reveal stays pinned to the
+      // spine even as layout above shifts.
+      const cRect = node.getBoundingClientRect();
+      lineYsRef.current = Array.from(
+        node.querySelectorAll<HTMLElement>("[data-reveal-line]")
+      ).map((lineEl) => {
+        const r = lineEl.getBoundingClientRect();
+        return { el: lineEl, y: r.top - cRect.top + r.height / 2 };
+      });
+
       setGeo(g);
     };
 
@@ -159,6 +174,15 @@ export default function Experience({
       }
 
       rectRef.current?.setAttribute("height", String(frontY));
+
+      // Per-line reveal: each content line surfaces the moment the spine's
+      // draw-front passes its position, so the text rides in with the curve as
+      // the user scrolls (rather than on its own timed stagger). Toggled
+      // imperatively to avoid re-rendering the whole list every scroll frame.
+      for (const { el: lineEl, y } of lineYsRef.current) {
+        const lineActive = reducedRef.current || frontY >= y - T.dotLead;
+        lineEl.setAttribute("data-on", lineActive ? "true" : "false");
+      }
 
       let changed = false;
       const next = onRef.current.slice();
@@ -366,14 +390,11 @@ export default function Experience({
                     {job.bullets.map((b, bi) => (
                       <li
                         key={bi}
-                        data-on={isOn ? "true" : "false"}
-                        style={{
-                          transitionTimingFunction: SPRING,
-                          transitionDelay: `${bi * 0.12}s`,
-                        }}
+                        data-reveal-line
+                        style={{ transitionTimingFunction: SPRING }}
                         className={cx(
                           "flex w-fit max-w-[44ch] gap-2 text-[15px] font-light leading-relaxed text-mist/70",
-                          // each line reveals on its own, one after another
+                          // revealed as the spine's draw-front passes this line
                           "translate-y-3 opacity-0 transition duration-500 will-change-transform",
                           "data-[on=true]:translate-y-0 data-[on=true]:opacity-100",
                           "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
@@ -388,14 +409,11 @@ export default function Experience({
                     ))}
                   </ul>
                   <div
-                    data-on={isOn ? "true" : "false"}
-                    style={{
-                      transitionTimingFunction: SPRING,
-                      transitionDelay: `${job.bullets.length * 0.12}s`,
-                    }}
+                    data-reveal-line
+                    style={{ transitionTimingFunction: SPRING }}
                     className={cx(
                       "mt-5 flex flex-wrap gap-2",
-                      // the tag row follows the last line in the stagger
+                      // the tag row reveals as the front reaches it too
                       "translate-y-3 opacity-0 transition duration-500 will-change-transform",
                       "data-[on=true]:translate-y-0 data-[on=true]:opacity-100",
                       "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",

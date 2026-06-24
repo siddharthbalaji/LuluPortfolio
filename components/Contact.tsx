@@ -8,22 +8,19 @@ const CARDS = [
     sub: "Email",
     label: PROFILE.email,
     href: `mailto:${PROFILE.email}`,
-    icon: "https://res.cloudinary.com/dxqucwyyo/image/upload/email-icon_fnstw6.svg",
-    color: "#EA4335",
+    icon: "https://res.cloudinary.com/dxqucwyyo/image/upload/email-icon_fnstw6.png",
   },
   {
     sub: "Phone",
     label: PROFILE.phone,
     href: `tel:${PROFILE.phoneHref}`,
-    icon: "https://res.cloudinary.com/dxqucwyyo/image/upload/phone-line-icon_wpiela.svg",
-    color: "#34A853",
+    icon: "https://res.cloudinary.com/dxqucwyyo/image/upload/phone-line-icon_wpiela.png",
   },
   {
     sub: "LinkedIn",
     label: PROFILE.name,
     href: PROFILE.linkedin,
-    icon: "https://res.cloudinary.com/dxqucwyyo/image/upload/linkedin-square-icon_sbdj8v.svg",
-    color: "#0A66C2",
+    icon: "https://res.cloudinary.com/dxqucwyyo/image/upload/linkedin-square-icon_sbdj8v.png",
   },
 ];
 
@@ -87,14 +84,13 @@ export default function Contact() {
               className="group flex w-full min-w-0 items-center gap-3.5 rounded-2xl border border-foam/12 bg-deep/25 px-5 py-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-tide/50 hover:bg-deep/40"
             >
               <span
-                className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border"
-                style={{ backgroundColor: `${c.color}14`, borderColor: `${c.color}55` }}
+                className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-foam/12 bg-abyss/50"
               >
                 <span
                   aria-hidden
                   className="h-6 w-6"
                   style={{
-                    backgroundColor: c.color,
+                    backgroundColor: "var(--tide)",
                     WebkitMaskImage: `url("${c.icon}")`,
                     maskImage: `url("${c.icon}")`,
                     WebkitMaskRepeat: "no-repeat",

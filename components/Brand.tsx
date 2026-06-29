@@ -91,7 +91,7 @@ function BrandCard({ link }: { link: BrandLink }) {
               src={WIP_BADGE}
               alt=""
               aria-hidden="true"
-              className="relative h-7 w-7 animate-floaty object-contain drop-shadow-[0_0_8px_rgba(250,204,21,0.9)]"
+              className="relative h-7 w-7 animate-floaty object-contain drop-shadow-[0_0_8px_rgba(250,204,21,0.9)] brightness-0 invert"
             />
           </span>
         )}

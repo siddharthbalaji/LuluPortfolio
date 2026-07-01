@@ -23,7 +23,7 @@ const BRAND_LINKS: BrandLink[] = [
   {
     title: "Take a Look at My Books",
     desc: "Browse the full collection on my books page.",
-    href: "https://lulu-books.vercel.app/",
+    href: "https://www.books.lulusidd.com/",
     icon: "books",
   },
   {

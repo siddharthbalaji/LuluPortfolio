@@ -14,7 +14,8 @@ const TABS: { id: Tab; label: string; count: number }[] = [
   { id: "motion", label: "Motion", count: VIDEOS.length },
 ];
 
-const POSTER_CATS = ["All", ...POSTER_GROUPS.map((g) => g.category)];
+const POSTER_CATS = POSTER_GROUPS.map((g) => g.category);
+const DEFAULT_CAT = POSTER_CATS[0] ?? "";
 
 // How many items to show before "View all": fewer on small screens, up to 8 on large.
 function useCollapsedCount() {
@@ -36,13 +37,12 @@ function useCollapsedCount() {
 
 export default function Work() {
   const [tab, setTab] = useState<Tab>("posters");
-  const [cat, setCat] = useState("All");
+  const [cat, setCat] = useState(DEFAULT_CAT);
   const [showAll, setShowAll] = useState(false);
   const collapsedCount = useCollapsedCount();
   const open = useUI((s) => s.open);
 
   const posterItems = useMemo<Media[]>(() => {
-    if (cat === "All") return POSTER_GROUPS.flatMap((g) => g.items);
     return POSTER_GROUPS.find((g) => g.category === cat)?.items ?? [];
   }, [cat]);
 
@@ -60,6 +60,15 @@ export default function Work() {
   const hasMore = activeItems.length > collapsedCount;
   const visibleItems =
     showAll || !hasMore ? activeItems : activeItems.slice(0, collapsedCount);
+
+  // Collapse the expanded grid and return to the top of the section so the
+  // viewer isn't stranded at the bottom of a very long list.
+  const collapse = () => {
+    setShowAll(false);
+    document
+      .getElementById("work")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <section id="work" className="relative bg-abyss px-6 py-24 sm:px-10 lg:py-32">
@@ -183,6 +192,36 @@ export default function Work() {
           )}
         </div>
       </div>
+
+      {/* Sticky collapse button — appears while the grid is expanded so long
+          categories (e.g. Concept) can be closed without scrolling back up. */}
+      <AnimatePresence>
+        {showAll && hasMore && (
+          <motion.button
+            initial={{ opacity: 0, y: 12, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.9 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            onClick={collapse}
+            aria-label="Collapse projects"
+            className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border border-tide/40 bg-abyss/80 px-5 py-3 font-mono text-[11px] uppercase tracking-widest2 text-foam shadow-lg shadow-abyss/50 backdrop-blur-md transition-colors hover:border-tide hover:bg-deep/70"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+            Close
+          </motion.button>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
